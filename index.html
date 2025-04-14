@@ -231,7 +231,7 @@
             key: "Related Specifications",
             data: [{
               value: "The Verifiable Credentials Data Model v2.0",
-              href: "https://www.w3.org/TR/VC-DATA-MODEL-2.0/"
+              href: "https://studyzy.github.io/vc-data-model/"
             }, {
               value: "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
               href: "https://www.w3.org/TR/vc-di-eddsa/"
@@ -397,6 +397,124 @@ table.simple tbody tr:last-of-type {
       本规范详细说明了密码学软件架构师和实现者如何将这些过程打包成称为[=密码学套件=]的东西，并将其提供给应用程序开发人员，以保护应用程序数据在传输和存储中的完整性。
     </p>
   </section>
+
+   <section class="informative">
+       <h3>设计目标和基本原理</h3>
+
+       <p>
+           本规范针对以下设计目标进行了优化：
+       </p>
+
+       <dl>
+           <dt>简单性</dt>
+           <dd>
+               该技术旨在使应用程序开发人员易于使用，而无需对密码学进行大量培训。它优先考虑以下群体的需求：应用程序开发人员优先于密码学套件实现者，密码学套件实现者优先于密码学套件设计者，密码学套件设计者优先于密码学算法规范作者。该解决方案专注于合理的默认值，以防止选择无效的保护机制。有关更多详细信息，请参阅第[[[#protecting-application-developers]]]节和第[[[#versioning-cryptography-suites]]]节。
+           </dd>
+           <dt>可组合性</dt>
+           <dd>
+               许多历史上的数字签名机制具有单一化的设计，将数据转换、语法、数字签名和序列化结合到单一规范中，从而限制了用例。本规范将每个组件分层，以支持更广泛的用例，包括通用的选择性披露和与序列化无关的签名。有关更多基本原理，请参阅第[[[#transformations]]]节、第[[[#data-opacity]]]节和第[[[#versioning-cryptography-suites]]]节。
+           </dd>
+           <dt>弹性</dt>
+           <dd>
+               由于技术进步可能会在没有警告的情况下破坏数字证明机制，因此[=密码学套件=]提供多层保护并能够快速升级是很重要的。本规范同时提供了算法灵活性和密码学分层，同时仍然保持数字证明格式易于开发人员理解和使用。有关详细信息，请参阅第[[[#agility-and-layering]]]节。
+           </dd>
+           <dt>渐进式可扩展性</dt>
+           <dd>
+               创建和部署新的密码学保护机制被设计为一个有计划的、迭代的和谨慎的过程，承认扩展是从实验到实现再到标准化的分阶段过程。本规范努力在密码学创新速度的提高与稳定的生产级密码学套件需求之间取得平衡。有关建立新类型密码学证明的说明，请参阅第[[[#cryptographic-suites]]]节。
+           </dd>
+           <dt>序列化灵活性</dt>
+           <dd>
+               密码学证明可以以多种不同但等效的方式序列化，并且通常与原始文档语法紧密绑定。本规范允许创建不绑定于原始文档语法的密码学证明，从而支持更高级的用例，例如能够在各种序列化语法（如 JSON 和 CBOR）中使用单一数字签名，而无需重新生成密码学证明。有关此方法的好处，请参阅第[[[#transformations]]]节。
+           </dd>
+       </dl>
+
+       <p class="note" title="技术在更广泛用例中的应用">
+           虽然本规范主要关注[=可验证凭证=]，但该技术的设计是通用的，因此可以用于其他用例。在这些情况下，实施者应自行尽职调查并进行专家审查，以确定该技术是否适用于其用例。
+       </p>
+
+   </section>
+
+   <section id="conformance">
+       <p>
+           一个<dfn>符合规范的受保护文档</dfn>是任何可以转换为
+           <a data-cite="INFRA#parse-json-bytes-to-a-javascript-value">
+               JSON 文档</a>的[=字节序列=]，并符合第[[[#proofs]]]节、第[[[#proof-purposes]]]节、第[[[#resource-integrity]]]节、第[[[#contexts-and-vocabularies]]]节和第[[[#dataintegrityproof]]]节中的相关规范性要求。
+       </p>
+
+       <p>
+           一个<dfn class="lint-ignore">符合规范的密码学套件规范</dfn>是任何符合第[[[#cryptographic-suites]]]节中相关规范性要求的规范。
+       </p>
+
+       <p>
+           一个<dfn class="lint-ignore">符合规范的处理器</dfn>是任何以软件和/或硬件实现的算法，该算法根据第[[[#algorithms]]]节中的相关规范性声明生成和/或消费[=符合规范的受保护文档=]。符合规范的处理器在消费不符合规范的文档时必须产生错误。
+       </p>
+
+   </section>
+
+   <section>
+       <h3>术语</h3>
+
+       <p>
+           本节定义了本规范中使用的术语。这些术语在本规范中出现时会附带链接。
+       </p>
+
+       <dl class="termlist definitions" data-sort="ascending">
+           <dt><dfn class="export">数据完整性证明</dfn></dt>
+           <dd>
+               一组表示数字证明及验证该证明所需参数的属性。<strong>数字签名</strong>是一种数据完整性证明。
+           </dd>
+           <dt><dfn>公钥</dfn></dt>
+           <dd>
+               可用于验证使用对应[=私钥=]创建的数字证明的密码学材料。
+           </dd>
+           <dt><dfn>私钥</dfn></dt>
+           <dd>
+               有时称为<strong>私有密钥</strong>，是一种不应与任何人共享的密码学材料，用于生成数字证明和/或数字签名。
+           </dd>
+           <dt><dfn class="export">证明目的</dfn></dt>
+           <dd>
+               证明的具体意图；实体创建它的原因。受保护的声明充当了一种保护措施，以防止证明被用于其原本未打算的用途。
+           </dd>
+
+           <dt><dfn class="export" data-lt="cryptosuite">密码学套件</dfn></dt>
+           <dd>
+               定义使用特定密码学原语以实现特定安全目标的规范。这些文档通常用于指定[=验证方法=]、数字签名类型、它们的标识符以及其他相关属性。有关更多详细信息，请参阅第[[[#cryptographic-suites]]]节。
+           </dd>
+
+           <dt><dfn>受控标识符文档</dfn></dt>
+
+           <dd>
+               包含密码学公共材料的文档，如[[[CID]]]规范中定义的那样。
+           </dd>
+
+           <dt><dfn data-lt="verifier|verifiers|verifier's">验证者</dfn></dt>
+           <dd>
+               一个实体执行的角色，通过接收包含一个或多个[=数据完整性证明=]的数据，然后确定证明是否合法。
+           </dd>
+
+           <dt><dfn class="export">验证方法</dfn></dt>
+
+           <dd>
+               <p>
+                   一组参数，可与一个过程一起使用以独立验证证明。例如，密码学[=公钥=]可用作数字签名的验证方法；在这种用法中，它验证签名者拥有相关的密码学[=私钥=]。
+               </p>
+               <p>
+                   在此定义中，“验证”和“证明”旨在广泛适用。例如，在 Diffie-Hellman 密钥交换期间，密码学公钥可能用于协商对称加密密钥，从而保证密钥协商过程的完整性。因此，这也是一种验证方法，即使过程描述可能未使用“验证”或“证明”一词。
+               </p>
+           </dd>
+
+           <dt><dfn class="export">验证关系</dfn></dt>
+
+           <dd>
+               <p>
+                   表达[=主体=]与[=验证方法=]之间关系的一种方式。验证关系的一个示例是
+                   <a data-cite="CID#authentication">身份验证</a>。
+               </p>
+           </dd>
+
+       </dl>
+
+   </section>
 </section>
     <section>
       <h2>数据模型</h2>
@@ -424,7 +542,7 @@ table.simple tbody tr:last-of-type {
       </p>
 
       <section>
-          <h3>证明</h3>
+          <h3 id="proofs">证明</h3>
           <p>
               [=数据完整性证明=] 提供了关于证明机制、验证该证明所需的参数以及证明值本身的信息。所有这些信息都使用诸如[[[?SECURITY-VOCABULARY]]]之类的链接数据词汇表提供。
           </p>
@@ -590,11 +708,11 @@ table.simple tbody tr:last-of-type {
           </p>
 
           <section>
-              <h3>证明集</h3>
+              <h3 id="proof-sets">证明集</h3>
               <p>
                   <dfn>证明集</dfn>在需要由多个实体保护相同数据但证明顺序无关紧要的情况下很有用，例如合同上的一组签名。证明集没有顺序，通过将一组证明与文档中的`proof`键关联来表示。
               </p>
-              <pre class="example nohighlight" title="数据文档中的一个证明集">
+              <pre class="example nohighlight" title="数据文档中的一个证明集" id="example-a-proof-set-in-a-data-document">
 {
   "@context": [
     {"myWebsite": "https://vocabulary.example/myWebsite"},
@@ -624,12 +742,12 @@ table.simple tbody tr:last-of-type {
           </section>
 
      <section>
-             <h3>证明链</h3>
+             <h3 id="proof-chains">证明链</h3>
              <p>
      <dfn>证明链</dfn>在需要对相同数据进行多方签名且签名顺序重要的情况下非常有用，例如公证人在文档上对已创建的证明进行副签的情况。证明链需要保留证明的顺序，通过为至少一个证明提供一个`id`（例如 UUID [[?RFC9562]]）以及另一个包含`previousProof`值的证明来标识前一个证明。
              </p>
              <pre class="example nohighlight"
-               title="数据文档中的一个证明链">
+               title="数据文档中的一个证明链" id="example-a-proof-chain-in-a-data-document">
      {
        "@context": [
          {"myWebsite": "https://vocabulary.example/myWebsite"},
@@ -661,7 +779,7 @@ table.simple tbody tr:last-of-type {
            </section>
 
            <section>
-             <h3>证明图</h3>
+             <h3 id="proof-graphs">证明图</h3>
 
              <p>
      在保护文档中的数据时，明确划分被保护的数据非常重要，这包括文档中表达的所有图，除了包含与保护机制相关的数据的图，该图被称为<dfn class="export">证明图</dfn>。创建这种分离使处理算法能够确定性地保护和验证受保护的文档。
@@ -679,7 +797,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
    <section>
-           <h3>证明目的</h3>
+           <h3 id="proof-purposes">证明目的</h3>
 
            <p>
    描述其目的的证明有助于防止被误用于其他目的。[=证明目的=]使[=验证者=]能够了解证明创建者的意图，从而防止消息被意外滥用于其他目的。例如，一个仅用于断言（可能意图广泛共享）的签名消息被滥用为用于身份验证服务或执行某些操作（例如调用某种能力）的消息。
@@ -719,7 +837,7 @@ table.simple tbody tr:last-of-type {
          </section>
 
          <section>
-           <h2>资源完整性</h2>
+           <h2 id="resource-integrity">资源完整性</h2>
 
            <p>
    当[=符合安全文档=]中包含指向外部资源的链接时，了解自证明创建以来所标识的资源是否已更改是很有必要的。这适用于远程检索的外部资源以及[=验证者=]可能拥有的资源本地缓存副本。
@@ -757,7 +875,7 @@ table.simple tbody tr:last-of-type {
 
          </section>
       <section>
-        <h2>上下文和词汇表</h2>
+        <h2 id="contexts-and-vocabularies">上下文和词汇表</h2>
 
         <p>
         执行 JSON-LD 处理的实现必须将以下 JSON-LD 上下文 URL 视为已解析，其中解析后的文档与下方对应的哈希值匹配：
@@ -882,7 +1000,7 @@ table.simple tbody tr:last-of-type {
         </p>
 
         <section>
-          <h3>验证上下文</h3>
+          <h3 id="validating-contexts">验证上下文</h3>
 
           <p>
         确保消费应用明确批准其将处理的输入文档的类型及其语义是必要的。不检查 JSON-LD 上下文值是否与已知的良好值匹配可能会导致安全漏洞，因为它们传递的语义可能存在差异。应用程序必须使用第 [[[#context-validation]]] 节中的算法，或实现等效保护的算法，以验证[=符合安全文档=]中的上下文。上下文验证必须在运行第 [[[#verify-proof]]] 节或第 [[[#verify-proof-sets-and-chains]]] 节中的适用算法之后运行。
@@ -911,7 +1029,7 @@ table.simple tbody tr:last-of-type {
         </section>
 
         <section>
-          <h3>上下文注入</h3>
+          <h3 id="context-injection">上下文注入</h3>
 
           <p>
         `@context` 属性用于确保在处理本规范中的术语时，所有实现都使用相同的语义。例如，当处理诸如 `type` 这样的属性及其值（如 `DataIntegrityProof`）时，这一点尤为重要。
@@ -927,7 +1045,7 @@ table.simple tbody tr:last-of-type {
         </section>
 
         <section>
-          <h3>无损保护数据</h3>
+          <h3 id="securing-data-losslessly">无损保护数据</h3>
 
           <p>
         HTML 处理器在检测到可恢复的错误时会继续处理。JSON-LD 处理器以类似方式运行。这种设计理念旨在确保开发人员可以仅使用 JSON-LD 语言中对其有用的部分，而不会因处理器对开发者可能不重要的内容抛出错误。这种设计导致 JSON-LD 处理器在遇到未定义的术语等情况时不会抛出错误，而是警告开发人员。
@@ -947,7 +1065,7 @@ table.simple tbody tr:last-of-type {
         </section>
 
         <section>
-          <h3>数据类型</h3>
+          <h3 id="datatypes">数据类型</h3>
 
           <p>
         本节定义了本规范使用的数据类型。
@@ -1028,7 +1146,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
    <section>
-  <h2>密码套件</h2>
+  <h2 id="cryptographic-suites">密码套件</h2>
   <p>
     [=数据完整性证明=] 旨在让开发者易于使用，因此尽量减少生成证明时需要记住的信息量。通常，开发者只需提供 [=密码套件=] 的名称（例如 `eddsa-rdfc-2022`）即可开始创建证明。这些 [=密码套件=] 通常由具备必要密码学培训的人创建和审核，以确保使用安全的密码学原语组合。本节规定了编写密码套件规范的要求。
   </p>
@@ -1079,7 +1197,7 @@ table.simple tbody tr:last-of-type {
   </p>
 
   <section>
-    <h3>数据完整性证明</h3>
+    <h3 id="dataintegrityproof">数据完整性证明</h3>
 
     <p>
       许多 [=密码套件=] 在表达 [=数据完整性证明=] 时遵循相同的基本模式。本节规定了这种通用设计模式，一种称为 `DataIntegrityProof` 的 [=密码套件=] 类型，通过重用设计原语和源代码减少了编写和实现 [=密码套件=] 的负担。
@@ -1119,7 +1237,7 @@ table.simple tbody tr:last-of-type {
   </section>
 </section>
     <section>
-      <h2>算法</h2>
+      <h2 id="algorithms">算法</h2>
 
       <p>
       以下定义的算法适用于表示为<dfn data-cite="RFC8259#section-4">JSON 对象</dfn>的文档。本规范遵循[[[JSON-LD11-API]]]规范，将 JSON 对象表示为[=映射=]。一个<dfn class="export">未加密数据文档</dfn>是一个[=映射=]，其中不包含任何证明值。一个<dfn>输入文档</dfn>是尚未添加当前证明的[=映射=]，但它可能包含由先前过程添加的证明值。一个<dfn class="export">已加密数据文档</dfn>是一个包含一个或多个证明值的[=映射=]。
@@ -1130,7 +1248,7 @@ table.simple tbody tr:last-of-type {
       </p>
 
       <section class="normative">
-        <h3>处理模型</h3>
+        <h3 id="processing-model">处理模型</h3>
 
         <p>
         本节描述了[=符合处理器=]及其特定于应用程序的软件所使用的处理模型。当软件需要确保信息具有防篡改性时，它会执行以下步骤：
@@ -1173,7 +1291,7 @@ table.simple tbody tr:last-of-type {
       </section>
 
      <section class="normative">
-       <h3>添加证明</h3>
+       <h3 id="add-proof">添加证明</h3>
 
        <p>
          以下算法指定了如何将数字证明添加到[=输入文档=]中，然后可以用来验证输出文档的真实性和完整性。所需输入包括[=输入文档=]（[=映射=] |inputDocument|）、[=密码套件实例=]（[=结构=] |cryptosuite|）以及一组选项（[=映射=] |options|）。输出是[=受保护数据文档=]（[=映射=]）或错误。每当此算法对字符串进行编码时，必须使用 UTF-8 编码。
@@ -1205,7 +1323,7 @@ table.simple tbody tr:last-of-type {
      </section>
 
      <section>
-       <h3>添加证明集/链</h3>
+       <h3 id="add-proof-set-chain">添加证明集/链</h3>
        <p>
          以下算法指定了如何从包含证明或证明集/链的受保护文档开始，逐步向证明集或证明链中添加证明。所需输入包括[=受保护数据文档=]（[=映射=] |securedDocument|）、[=密码学套件=]（[=密码套件实例=] |suite|）以及一组选项（[=映射=] |options|）。输出是新的[=受保护数据文档=]（[=映射=]）。每当此算法对字符串进行编码时，必须使用 UTF-8 编码。
        </p>
@@ -1246,7 +1364,7 @@ table.simple tbody tr:last-of-type {
        </ol>
      </section>
       <section>
-        <h3>验证证明</h3>
+        <h3 id="verify-proof">验证证明</h3>
 
         <p>
           以下算法指定了如何通过验证数字证明来检查[=受保护数据文档=]的真实性和完整性。该算法的输入包括：
@@ -1347,7 +1465,7 @@ table.simple tbody tr:last-of-type {
         </ol>
       </section>
      <section>
-        <h3>验证证明集和链</h3>
+        <h3 id="verify-proof-sets-and-chains">验证证明集和链</h3>
         <p>
           在[=证明集=]或[=证明链=]中，[=受保护数据文档=]具有一个 `proof` 属性，其中包含[=证明=]的列表 (|allProofs|)。以下算法提供了一种方法，用于通过验证 |allProofs| 中的每个证明来检查[=受保护数据文档=]的真实性和完整性。如果只需要验证 |allProofs| 中的部分证明，也可以采用其他方法。但如果选择验证部分证明，需要注意，任何包含 `previousProof` 的证明只有在其引用的证明也被验证通过时，才能被视为已验证。
         </p>
@@ -1408,7 +1526,7 @@ table.simple tbody tr:last-of-type {
       </section>
 
       <section class="normative">
-        <h3>上下文验证</h3>
+        <h3 id="context-validation">上下文验证</h3>
 
         <p>
           以下算法提供了一种机制，用于确保应用程序在执行文档中输入的业务规则之前，理解与文档关联的上下文。有关此算法的更多原理，请参阅第 [[[#validating-contexts]]] 节。此算法的输入包括文档（[=映射=] |inputDocument|）、一组已知的 JSON-LD 上下文（[=列表=] |knownContext|）以及在检测到未知上下文时是否重新压缩的布尔值（[=布尔值=] |recompact|）。
@@ -1524,7 +1642,7 @@ table.simple tbody tr:last-of-type {
       </p>
 
       <section>
-        <h3>密码套件的版本控制</h3>
+        <h3 id="versioning-cryptography-suites">密码套件的版本控制</h3>
 
         <p>
       密码学通过使用密钥来保护信息。掌握必要的密钥可以轻松地访问某些信息。同样的信息也可以通过计算上困难的暴力破解尝试来访问。所有现代密码学都要求这种计算上困难的方法在时间上保持困难，但科学和数学的突破可能会改变这一点。也就是说，<em>密码学是有时效性的</em>。
@@ -1544,7 +1662,7 @@ table.simple tbody tr:last-of-type {
       </section>
 
       <section>
-        <h3>保护应用程序开发人员</h3>
+        <h3 id="protecting-application-developers">保护应用程序开发人员</h3>
 
         <p>
       现代密码学算法提供了许多可调参数和选项，以确保算法能够满足不同用例的多样化需求。例如，嵌入式系统的处理能力和内存环境有限，可能无法生成给定算法的最强数字签名。其他环境（如金融交易系统）可能只需要在交易期间保护数据一天，而其他环境可能需要保护数据数十年。为了满足这些需求，密码学算法设计者通常会提供多种配置密码学算法的方法。
@@ -1581,7 +1699,7 @@ table.simple tbody tr:last-of-type {
         </p>
       </section>
     <section>
-      <h3>密码套件命名约定</h3>
+      <h3 id="conventions-for-naming-cryptography-suites">密码套件命名约定</h3>
       <p>
         第 [[[#versioning-cryptography-suites]]] 节强调了提供易于理解的密码套件时效性信息的重要性，而第 [[[#protecting-application-developers]]] 节进一步强调了减少需要指定的选项数量的必要性。实际上，第 [[[#cryptographic-suites]]] 节列出了密码套件的要求，包括算法、转换、哈希和序列化的详细规范。因此，密码套件的名称不需要包含所有这些细节，这意味着第 [[[#versioning-cryptography-suites]]] 节中提到的<em>参数化版本控制</em>既不必要也不可取。
       </p>
@@ -1597,7 +1715,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
     <section>
-      <h3>灵活性与分层</h3>
+      <h3 id="agility-and-layering">灵活性与分层</h3>
       <p>
         <dfn class="lint-ignore">密码学灵活性</dfn> 是一种设计<em>频繁连接</em>的信息安全系统以支持<em>在多种密码学原语和/或算法之间切换</em>的实践。密码学灵活性的主要目标是使系统能够快速适应新的密码学原语和算法，而无需对系统基础设施进行破坏性更改。因此，当某个特定的密码学原语（例如 SHA-1 算法）被认为不再安全时，可以通过简单的配置文件更改将系统重新配置为使用更新的原语。
       </p>
@@ -1613,7 +1731,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
     <section>
-      <h3>更安全的抽象</h3>
+      <h3 id="safer-abstractions">更安全的抽象</h3>
       <p>
         一个 [=证明=] 包含一个 `proofValue`，其中可以嵌入与密码学证明相关的多个参数。例如，[[[?VC-DI-ECDSA]]] 规范中的选择性披露算法在 `proofValue` 中包含多个密码学签名，每个可选择披露的项目都有一个签名。这是为了使技术更易于应用程序开发人员使用并更安全。
       </p>
@@ -1625,7 +1743,7 @@ table.simple tbody tr:last-of-type {
       </p>
     </section>
     <section>
-      <h3>转换</h3>
+      <h3 id="transformations">转换</h3>
 
       <p>
         在密码保护过程中，有时对被保护的数据进行转换是有益的。这种“内联”转换可以使特定类型的密码保护与其承载的数据格式无关。例如，一些数据完整性密码套件利用 RDF 数据集规范化 [[?RDF-CANON]]，将初始表示形式转换为规范化形式 [[?N-QUADS]]，然后进行序列化、哈希和数字签名。只要表达被保护数据的任何语法都可以转换为这种规范化形式，数字签名就可以被验证。这使得相同的数字签名可以在 JSON、CBOR、YAML 和其他兼容语法中表达，而无需为每种语法创建密码证明。
@@ -1643,7 +1761,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
     <section>
-      <h3>受保护的信息</h3>
+      <h3 id="protected-information">受保护的信息</h3>
 
       <p>
         任何 [=数据完整性证明=] 所保护的数据是 [=转换|转换后的数据=]。[=转换|转换后的数据=] 是由特定 [=密码套件=] 指定的 [=转换算法=] 生成的。这种保护机制不同于一些不对输入数据进行任何 [=转换=] 的传统数字签名机制。[=转换=] 的好处详见第 [[[#transformations]]] 节。
@@ -1668,7 +1786,7 @@ table.simple tbody tr:last-of-type {
       </p>
     </section>
     <section>
-      <h3>数据不透明性</h3>
+      <h3 id="data-opacity">数据不透明性</h3>
 
       <p>
         应用数据的可检查性会影响系统效率和开发人员的生产力。当密码学保护的应用数据（如基于编码的二进制数据）无法被应用子系统（如数据库）轻松处理时，处理这些密码学保护信息的工作量会增加。例如，可以被数据库本地存储和索引的密码学保护负载将简化系统设计，使其：
@@ -1704,7 +1822,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
     <section>
-      <h3>验证方法绑定</h3>
+      <h3 id="verification-method-binding">验证方法绑定</h3>
 
       <p>
         实现者通过从[=验证方法=]的定义到[=受控标识符文档=]，并确保[=受控标识符文档=]也包含对[=验证方法=]的引用，来确保[=验证方法=]绑定到特定的控制器。此过程在
@@ -1713,7 +1831,7 @@ table.simple tbody tr:last-of-type {
     </section>
 
     <section>
-      <h3>验证关系验证</h3>
+      <h3 id="verification-relationship-validation">验证关系验证</h3>
 
       <p>
         当实现正在<a href="#verify-proof">验证证明</a>时，必须验证生成证明所用的[=验证方法=]不仅列在[=受控标识符文档=]中，还必须验证其确实用于生成正在验证的证明。此过程称为“验证关系验证”。
@@ -1729,7 +1847,7 @@ table.simple tbody tr:last-of-type {
       </p>
     </section>
    <section>
-     <h3>证明目的验证</h3>
+     <h3 id="proof-purpose-validation">证明目的验证</h3>
 
      <p>
        当实现正在<a href="#verify-proof">验证证明</a>时，必须验证[=证明目的=]是否与预期用途匹配。
@@ -1741,7 +1859,7 @@ table.simple tbody tr:last-of-type {
    </section>
 
    <section>
-     <h3>规范化方法的安全性</h3>
+     <h3 id="canonicalization-method-security">规范化方法的安全性</h3>
 
      <p>
        转换（如规范化）的执行方式会影响系统的安全特性。选择最佳的规范化机制取决于具体的用例。通常，满足所需安全要求的最简单机制是最佳选择。本节尝试为实现者在本规范中提到的两种主要规范化机制之间提供简单的指导，即 JSON 规范化方案 [[RFC8785]] 和 RDF 数据集规范化 [[RDF-CANON]]。
@@ -1758,7 +1876,7 @@ table.simple tbody tr:last-of-type {
    </section>
 
    <section>
-     <h3>规范化方法的正确性</h3>
+     <h3 id="canonicalization-method-correctness">规范化方法的正确性</h3>
 
      <p>
        本规范使用的算法过程之一是规范化，这是一种[=转换=]。规范化是将可能以多种语义等价方式表达的信息作为输入，并以一种称为“规范形式”的单一方式表达所有输出的过程。
@@ -1775,7 +1893,7 @@ table.simple tbody tr:last-of-type {
    </section>
 
    <section>
-     <h3>网络请求</h3>
+     <h3 id="network-requests">网络请求</h3>
 
      <p>
        本规范的设计方式确保在[=符合安全文档=]上验证证明时不需要网络请求。然而，读者可能会注意到，<a href="#data-model">JSON-LD 上下文</a>和[=验证方法=]可能包含可以通过网络连接检索的 URL。这种担忧适用于验证期间或之后可能从网络加载的任何 URL。
@@ -1804,7 +1922,7 @@ table.simple tbody tr:last-of-type {
           </p>
 
           <section>
-            <h3>不可关联性</h3>
+            <h3 id="unlinkability">不可关联性</h3>
 
             <p>
     当一个数字签名的有效负载包含被多个验证者看到的数据时，它会成为一个关联点。例如，购物会员卡号就是一个例子。可关联的数据可能会被验证者用于跟踪目的，这有时会违反隐私预期。一些数据可以被用于跟踪的事实可能并不立即显现。可关联数据的示例包括但不限于静态数字签名或图像的密码学哈希值。
@@ -1828,7 +1946,7 @@ table.simple tbody tr:last-of-type {
           </section>
 
           <section>
-            <h3>选择性披露</h3>
+            <h3 id="selective-disclosure">选择性披露</h3>
 
             <p>
     选择性披露是一种技术，它使得先前签名消息的接收者（即由其创建者签名的消息）能够仅披露消息的部分内容，而不影响这些部分的可验证性。例如，某人可能会选择性地披露数字驾驶执照以租车。这可能涉及仅披露执照的签发机构、执照号码、出生日期和授权的机动车类别。请注意，在这种情况下，执照号码是可关联的信息，但由于未共享驾驶员的全名和地址，因此保留了一定程度的隐私。
