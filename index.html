@@ -22,13 +22,13 @@
           shortName:            "vc-data-integrity",
 
           // subtitle
-          subtitle: "Securing the Integrity of Verifiable Credential Data",
+          subtitle: "确保可验证凭证数据的完整性",
 
           // if you wish the publication date to be other than today, set this
           publishDate: "2025-3-20",
           crEnd: "2025-01-19",
           prEnd: "2025-4-17",
-
+          // noRecTrack: true,
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
           // previousPublishDate:  "1977-03-15",
@@ -513,7 +513,7 @@ table.simple tbody tr:last-of-type {
 
            <dd>
                <p>
-                   表达[=主体=]与[=验证方法=]之间关系的一种方式。验证关系的一个示例是
+                   表达主体与[=验证方法=]之间关系的一种方式。验证关系的一个示例是
                    <a data-cite="CID#authentication">身份验证</a>。
                </p>
            </dd>
@@ -600,7 +600,7 @@ table.simple tbody tr:last-of-type {
 
               <dt id="defn-challenge"><dfn data-lt="挑战">challenge</dfn></dt>
               <dd>
-                  如果指定了`domain`，则应在证明中包含一个<a data-cite="INFRA#string">字符串</a>值。该值在特定[=域=]和时间窗口内使用一次。此值用于减轻重放攻击。挑战值的示例包括：`1235abcd6789`、`79d34551-ae81-44ae-823b-6dadbab9ebd4`和`ruby`。
+                  如果指定了`domain`，则应在证明中包含一个<a data-cite="INFRA#string">字符串</a>值。该值在特定域和时间窗口内使用一次。此值用于减轻重放攻击。挑战值的示例包括：`1235abcd6789`、`79d34551-ae81-44ae-823b-6dadbab9ebd4`和`ruby`。
               </dd>
 
               <dt><dfn class="lint-ignore">proofValue</dfn></dt>
