@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
    <title>可验证凭证数据完整性 1.0</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
@@ -315,7 +315,7 @@ table.simple tbody tr:last-of-type {
 <body>
 <section id='abstract'>
   <p>
-    本规范描述了使用密码学（特别是数字签名和相关数学证明）确保[=可验证凭证=]及类似受限数字文档的真实性和完整性的机制。
+    本规范描述了使用密码学（特别是数字签名和相关数学证明）确保<a data-cite="VC#dfn-vc">可验证凭证</a>及类似受限数字文档的真实性和完整性的机制。
   </p>
 </section>
 
@@ -328,12 +328,12 @@ table.simple tbody tr:last-of-type {
 <section class="informative">
   <h2>介绍</h2>
   <p>
-    本规范描述了使用密码学（特别是数字签名和相关数学证明）确保[=可验证凭证=]及[=verifiable credentials=]类似受限数字文档的真实性和完整性的机制。密码学证明为分布式系统的实现者提供了有用的功能。例如，证明可以用于：
+    本规范描述了使用密码学（特别是数字签名和相关数学证明）确保<a data-cite="VC#dfn-vc">可验证凭证</a>及类似受限数字文档的真实性和完整性的机制。密码学证明为分布式系统的实现者提供了有用的功能。例如，证明可以用于：
   </p>
 
   <ul>
     <li>
-      发表可以共享而不会丧失信任的声明，因为第三方可以验证其作者身份，例如作为[=可验证凭证=] [[?VC-DATA-MODEL-2.0]]、[=可验证展示=]或社交媒体帖子的一部分。
+      发表可以共享而不会丧失信任的声明，因为第三方可以验证其作者身份，例如作为<a data-cite="VC#dfn-vc">可验证凭证</a> [[?VC-DATA-MODEL-2.0]]、<a data-cite="VC#dfn-vp">可验证展示</a>或社交媒体帖子的一部分。
     </li>
     <li>
       以特定标识符标识的实体进行身份验证，例如由去中心化标识符（DID）[[?DID]]标识的主体。
@@ -400,7 +400,7 @@ table.simple tbody tr:last-of-type {
     </p>
 
     <p>
-      本规范详细说明了密码学软件架构师和实现者如何将这些过程打包成称为[=密码学套件=]的东西，并将其提供给应用程序开发人员，以保护应用程序数据在传输和存储中的完整性。
+      本规范详细说明了密码学软件架构师和实现者如何将这些过程打包成称为[=密码套件=]的东西，并将其提供给应用程序开发人员，以保护应用程序数据在传输和存储中的完整性。
     </p>
   </section>
 
@@ -422,7 +422,7 @@ table.simple tbody tr:last-of-type {
            </dd>
            <dt>弹性</dt>
            <dd>
-               由于技术进步可能会在没有警告的情况下破坏数字证明机制，因此[=密码学套件=]提供多层保护并能够快速升级是很重要的。本规范同时提供了算法灵活性和密码学分层，同时仍然保持数字证明格式易于开发人员理解和使用。有关详细信息，请参阅第[[[#agility-and-layering]]]节。
+               由于技术进步可能会在没有警告的情况下破坏数字证明机制，因此[=密码套件=]提供多层保护并能够快速升级是很重要的。本规范同时提供了算法灵活性和密码学分层，同时仍然保持数字证明格式易于开发人员理解和使用。有关详细信息，请参阅第[[[#agility-and-layering]]]节。
            </dd>
            <dt>渐进式可扩展性</dt>
            <dd>
@@ -435,16 +435,16 @@ table.simple tbody tr:last-of-type {
        </dl>
 
        <p class="note" title="技术在更广泛用例中的应用">
-           虽然本规范主要关注[=可验证凭证=]，但该技术的设计是通用的，因此可以用于其他用例。在这些情况下，实施者应自行尽职调查并进行专家审查，以确定该技术是否适用于其用例。
+           虽然本规范主要关注<a data-cite="VC#dfn-vc">可验证凭证</a>，但该技术的设计是通用的，因此可以用于其他用例。在这些情况下，实施者应自行尽职调查并进行专家审查，以确定该技术是否适用于其用例。
        </p>
 
    </section>
 
    <section id="conformance">
        <p>
-           一个<dfn>符合规范的受保护文档</dfn>是任何可以转换为
+           一个<dfn>符合规范的安全文档</dfn>是任何可以转换为
            <a data-cite="INFRA#parse-json-bytes-to-a-javascript-value">
-               JSON 文档</a>的[=字节序列=]，并符合第[[[#proofs]]]节、第[[[#proof-purposes]]]节、第[[[#resource-integrity]]]节、第[[[#contexts-and-vocabularies]]]节和第[[[#dataintegrityproof]]]节中的相关规范性要求。
+               JSON 文档</a>的<a data-cite="INFRA#byte-sequence">字节序列</a>，并符合第[[[#proofs]]]节、第[[[#proof-purposes]]]节、第[[[#resource-integrity]]]节、第[[[#contexts-and-vocabularies]]]节和第[[[#dataintegrityproof]]]节中的相关规范性要求。
        </p>
 
        <p>
@@ -452,7 +452,7 @@ table.simple tbody tr:last-of-type {
        </p>
 
        <p>
-           一个<dfn class="lint-ignore">符合规范的处理器</dfn>是任何以软件和/或硬件实现的算法，该算法根据第[[[#algorithms]]]节中的相关规范性声明生成和/或消费[=符合规范的受保护文档=]。符合规范的处理器在消费不符合规范的文档时必须产生错误。
+           一个<dfn class="lint-ignore">符合规范的处理器</dfn>是任何以软件和/或硬件实现的算法，该算法根据第[[[#algorithms]]]节中的相关规范性声明生成和/或消费[=符合规范的安全文档=]。符合规范的处理器在消费不符合规范的文档时必须产生错误。
        </p>
 
    </section>
@@ -482,7 +482,7 @@ table.simple tbody tr:last-of-type {
                证明的具体意图；实体创建它的原因。受保护的声明充当了一种保护措施，以防止证明被用于其原本未打算的用途。
            </dd>
 
-           <dt><dfn class="export" data-lt="cryptosuite">密码学套件</dfn></dt>
+           <dt><dfn class="export" data-lt="cryptosuite">密码套件</dfn></dt>
            <dd>
                定义使用特定密码学原语以实现特定安全目标的规范。这些文档通常用于指定[=验证方法=]、数字签名类型、它们的标识符以及其他相关属性。有关更多详细信息，请参阅第[[[#cryptographic-suites]]]节。
            </dd>
@@ -523,7 +523,7 @@ table.simple tbody tr:last-of-type {
    </section>
 </section>
     <section>
-      <h2>数据模型</h2>
+      <h2 id="data-model">数据模型</h2>
 
       <p>
       本节规定了用于表达[=数据完整性证明=]及相关资源完整性的数据模型。
@@ -554,7 +554,7 @@ table.simple tbody tr:last-of-type {
           </p>
 
           <p>
-              在对象上表达[=数据完整性证明=]时，必须使用<dfn class="lint-ignore">`proof`</dfn>属性。[=可验证凭证=]中的`proof`属性是一个[=命名图=]。如果存在，其值必须是以下属性中描述的单个对象或无序对象集。
+              在对象上表达[=数据完整性证明=]时，必须使用<dfn class="lint-ignore" data-lt="证明">`proof`</dfn>属性。<a data-cite="VC#dfn-vc">可验证凭证</a>中的`proof`属性是一个[=命名图=]。如果存在，其值必须是以下属性中描述的单个对象或无序对象集。
           </p>
 
           <dl style="margin-left: 1em;">
@@ -565,17 +565,17 @@ table.simple tbody tr:last-of-type {
 
               <dt>type</dt>
               <dd>
-                  必须指定证明的具体类型，作为映射到 URL [[URL]]的[=字符串=]。证明类型的示例包括`DataIntegrityProof`和`Ed25519Signature2020`。证明类型决定了保护和验证证明所需的其他字段。
+                  必须指定证明的具体类型，作为映射到 URL [[URL]]的<a data-cite="INFRA#string">字符串</a>。证明类型的示例包括`DataIntegrityProof`和`Ed25519Signature2020`。证明类型决定了保护和验证证明所需的其他字段。
               </dd>
 
               <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
               <dd>
-                  必须指定创建证明的原因，作为映射到 URL [[URL]]的[=字符串=]。证明目的充当一种保护措施，防止证明被用于其原本未打算的用途。例如，如果没有此值，证明的创建者可能会被诱导在登录过程中使用通常用于创建可验证凭证（`assertionMethod`）的密码学材料（`authentication`），从而导致创建了他们从未打算创建的[=可验证凭证=]，而不是预期的登录操作。
+                  必须指定创建证明的原因，作为映射到 URL [[URL]]的<a data-cite="INFRA#string">字符串</a>。证明目的充当一种保护措施，防止证明被用于其原本未打算的用途。例如，如果没有此值，证明的创建者可能会被诱导在登录过程中使用通常用于创建可验证凭证（`assertionMethod`）的密码学材料（`authentication`），从而导致创建了他们从未打算创建的<a data-cite="VC#dfn-vc">可验证凭证</a>，而不是预期的登录操作。
               </dd>
 
               <dt>verificationMethod</dt>
               <dd>
-                  验证方法是验证证明所需的手段和信息。如果包含，该值必须是映射到[[URL]]的[=字符串=]。包含`verificationMethod`是可选的，但如果未包含，其他属性（如`cryptosuite`）可能提供获取验证证明所需信息的机制。请注意，当在[=数据完整性证明=]中表达`verificationMethod`时，该值指向数据的实际位置；也就是说，`verificationMethod`通过 URL 引用可以用来验证证明的[=公钥=]的位置。此[=公钥=]数据存储在[=受控标识符文档=]中，其中包含验证方法的完整描述。
+                  验证方法是验证证明所需的手段和信息。如果包含，该值必须是映射到[[URL]]的<a data-cite="INFRA#string">字符串</a>。包含`verificationMethod`是可选的，但如果未包含，其他属性（如`cryptosuite`）可能提供获取验证证明所需信息的机制。请注意，当在[=数据完整性证明=]中表达`verificationMethod`时，该值指向数据的实际位置；也就是说，`verificationMethod`通过 URL 引用可以用来验证证明的[=公钥=]的位置。此[=公钥=]数据存储在[=受控标识符文档=]中，其中包含验证方法的完整描述。
               </dd>
 
               <dt>cryptosuite</dt>
@@ -585,12 +585,12 @@ table.simple tbody tr:last-of-type {
 
               <dt><dfn class="lint-ignore">created</dfn></dt>
               <dd>
-                  证明创建的日期和时间是可选的，如果包含，必须指定为[[XMLSCHEMA11-2]] `dateTimeStamp`字符串，使用协调世界时（UTC），以 Z 结尾，或带有相对于 UTC 的时区偏移量。[=符合处理器=]可以选择处理未正确序列化且没有偏移量的时间值。未正确序列化且没有偏移量的时间值应被解释为 UTC。
+                  证明创建的日期和时间是可选的，如果包含，必须指定为[[XMLSCHEMA11-2]] `dateTimeStamp`字符串，使用协调世界时（UTC），以 Z 结尾，或带有相对于 UTC 的时区偏移量。[=符合规范的处理器=]可以选择处理未正确序列化且没有偏移量的时间值。未正确序列化且没有偏移量的时间值应被解释为 UTC。
               </dd>
 
               <dt id="defn-proof-expires">expires</dt>
               <dd>
-                  `expires`属性是可选的，如果存在，指定证明的过期时间。如果存在，必须是[[XMLSCHEMA11-2]] `dateTimeStamp`字符串，使用协调世界时（UTC），以 Z 结尾，或带有相对于 UTC 的时区偏移量。[=符合处理器=]可以选择处理未正确序列化且没有偏移量的时间值。未正确序列化且没有偏移量的时间值应被解释为 UTC。
+                  `expires`属性是可选的，如果存在，指定证明的过期时间。如果存在，必须是[[XMLSCHEMA11-2]] `dateTimeStamp`字符串，使用协调世界时（UTC），以 Z 结尾，或带有相对于 UTC 的时区偏移量。[=符合规范的处理器=]可以选择处理未正确序列化且没有偏移量的时间值。未正确序列化且没有偏移量的时间值应被解释为 UTC。
               </dd>
 
               <dt id="defn-domain">domain</dt>
@@ -598,14 +598,14 @@ table.simple tbody tr:last-of-type {
                   `domain`属性是可选的。它传达了证明旨在使用的一个或多个安全域。如果指定，关联的值必须是字符串或无序字符串集。验证者应使用该值确保证明旨在验证者操作的安全域中使用。`domain`参数的规范在挑战-响应协议中很有用，其中验证者在证明创建者已知的安全域中操作。域值的示例包括：`domain.example`（DNS 域）、`https://domain.example:8443`（Web 源）、`mycorp-intranet`（定制文本字符串）和`b31d37d4-dd59-47d3-9dd8-c973da43b63a`（UUID）。
               </dd>
 
-              <dt id="defn-challenge"><dfn>challenge</dfn></dt>
+              <dt id="defn-challenge"><dfn data-lt="挑战">challenge</dfn></dt>
               <dd>
-                  如果指定了`domain`，则应在证明中包含一个[=字符串=]值。该值在特定[=域=]和时间窗口内使用一次。此值用于减轻重放攻击。挑战值的示例包括：`1235abcd6789`、`79d34551-ae81-44ae-823b-6dadbab9ebd4`和`ruby`。
+                  如果指定了`domain`，则应在证明中包含一个<a data-cite="INFRA#string">字符串</a>值。该值在特定[=域=]和时间窗口内使用一次。此值用于减轻重放攻击。挑战值的示例包括：`1235abcd6789`、`79d34551-ae81-44ae-823b-6dadbab9ebd4`和`ruby`。
               </dd>
 
               <dt><dfn class="lint-ignore">proofValue</dfn></dt>
               <dd>
-                  一个[=字符串=]值，表示使用指定的`verificationMethod`验证数字证明所需的基编码二进制数据。该值必须使用[[[CID]]]规范的第<a data-cite="CID#multibase-0">2.4 Multibase</a>节中描述的标头和编码来表达二进制数据。此值的内容由特定的密码学套件确定，并设置为该密码学套件的<a href="#add-proof">添加证明算法</a>生成的<em>证明值</em>。可以使用由密码学套件指定的其他属性（具有不同的编码）代替此属性来编码验证数字证明所需的数据。
+                  一个<a data-cite="INFRA#string">字符串</a>值，表示使用指定的`verificationMethod`验证数字证明所需的基编码二进制数据。该值必须使用[[[CID]]]规范的第<a data-cite="CID#multibase-0">2.4 Multibase</a>节中描述的标头和编码来表达二进制数据。此值的内容由特定的密码学套件确定，并设置为该密码学套件的<a href="#add-proof">添加证明算法</a>生成的<em>证明值</em>。可以使用由密码学套件指定的其他属性（具有不同的编码）代替此属性来编码验证数字证明所需的数据。
               </dd>
 
               <dt><dfn class="lint-ignore">previousProof</dfn></dt>
@@ -615,7 +615,7 @@ table.simple tbody tr:last-of-type {
 
               <dt><dfn class="lint-ignore">nonce</dfn></dt>
               <dd>
-                  由证明创建者提供的可选[=字符串=]值。此字段的一个用途是通过减少由确定性生成的签名导致的可链接性来增加隐私。
+                  由证明创建者提供的可选<a data-cite="INFRA#string">字符串</a>值。此字段的一个用途是通过减少由确定性生成的签名导致的可链接性来增加隐私。
               </dd>
 
           </dl>
@@ -631,7 +631,7 @@ table.simple tbody tr:last-of-type {
         </pre>
 
           <p>
-              以下证明使用`eddsa-jcs-2022`密码学套件[[?DI-EDDSA]]保护上述文档，该套件通过使用 JSON 规范化方案（JCS）[[?RFC8785]]转换输入数据并使用 Edwards 数字签名算法（EdDSA）对其进行数字签名来生成可验证的数字证明。
+              以下证明使用`eddsa-jcs-2022`密码套件[[?DI-EDDSA]]保护上述文档，该套件通过使用 JSON 规范化方案（JCS）[[?RFC8785]]转换输入数据并使用 Edwards 数字签名算法（EdDSA）对其进行数字签名来生成可验证的数字证明。
           </p>
 
           <pre class="example nohighlight"
@@ -662,7 +662,7 @@ table.simple tbody tr:last-of-type {
         </pre>
 
           <p>
-              以下证明使用`ecdsa-rdfc-2019`密码学套件[[?DI-ECDSA]]保护上述文档，该套件通过使用 RDF 数据集规范化方案[[?RDF-CANON]]转换输入数据并使用椭圆曲线数字签名算法（ECDSA）对其进行数字签名来生成可验证的数字证明。
+              以下证明使用`ecdsa-rdfc-2019`密码套件[[?DI-ECDSA]]保护上述文档，该套件通过使用 RDF 数据集规范化方案[[?RDF-CANON]]转换输入数据并使用椭圆曲线数字签名算法（ECDSA）对其进行数字签名来生成可验证的数字证明。
           </p>
 
           <pre class="example nohighlight"
@@ -818,13 +818,13 @@ table.simple tbody tr:last-of-type {
            </p>
 
            <dl>
-             <dt><dfn class="external">authentication</dfn></dt>
+             <dt><dfn class="external" data-lt="身份验证">authentication</dfn></dt>
              <dd>
    表示给定的证明仅用于身份验证协议的目的。
              </dd>
              <dt><dfn class="external lint-ignore">assertionMethod</dfn></dt>
              <dd>
-   表示证明只能用于进行断言，例如签署[=可验证凭证=]。
+   表示证明只能用于进行断言，例如签署<a data-cite="VC#dfn-vc">可验证凭证</a>。
              </dd>
              <dt><dfn class="external lint-ignore">keyAgreement</dfn></dt>
              <dd>
@@ -846,10 +846,10 @@ table.simple tbody tr:last-of-type {
            <h2 id="resource-integrity">资源完整性</h2>
 
            <p>
-   当[=符合安全文档=]中包含指向外部资源的链接时，了解自证明创建以来所标识的资源是否已更改是很有必要的。这适用于远程检索的外部资源以及[=验证者=]可能拥有的资源本地缓存副本。
+   当[=符合规范的安全文档=]中包含指向外部资源的链接时，了解自证明创建以来所标识的资源是否已更改是很有必要的。这适用于远程检索的外部资源以及[=验证者=]可能拥有的资源本地缓存副本。
            </p>
            <p>
-   为了确认[=符合安全文档=]引用的资源自文档被保护以来未发生更改，实现者可以在包含`id`属性的任何对象中包含一个名为<dfn class="lint-ignore">`digestMultibase`</dfn>的属性。如果存在，`digestMultibase`值必须是单个[=字符串=]值，或[=字符串=]值的[=列表=]，其中每个值都是<a data-cite="CID#multibase">Multibase</a>编码的<a data-cite="CID#multihash">Multihash</a>值。
+   为了确认[=符合规范的安全文档=]引用的资源自文档被保护以来未发生更改，实现者可以在包含`id`属性的任何对象中包含一个名为<dfn class="lint-ignore">`digestMultibase`</dfn>的属性。如果存在，`digestMultibase`值必须是单个<a data-cite="INFRA#string">字符串</a>值，或<a data-cite="INFRA#string">字符串</a>值的<a data-cite="INFRA#list">列表</a>，其中每个值都是<a data-cite="CID#multibase">Multibase</a>编码的<a data-cite="CID#multihash">Multihash</a>值。
            </p>
            <p>
    JSON-LD 上下文作者应将`digestMultibase`添加到将用于引用其他资源的文档的上下文中，并包含相关的密码学摘要。例如，[[[?VC-DATA-MODEL-2.0]]]基础上下文（`https://www.w3.org/ns/credentials/v2`）包含`digestMultibase`属性。
@@ -994,11 +994,11 @@ table.simple tbody tr:last-of-type {
         </p>
 
         <p>
-        实现者可以在开发过程中从网络加载特定应用的 JSON-LD 上下文文件，但在生产环境中，应该永久缓存用于[=符合安全文档=]的 JSON-LD 上下文文件，以提高其安全性和隐私特性。可以通过上述缓存方法或功能等效的机制实现处理速度目标。
+        实现者可以在开发过程中从网络加载特定应用的 JSON-LD 上下文文件，但在生产环境中，应该永久缓存用于[=符合规范的安全文档=]的 JSON-LD 上下文文件，以提高其安全性和隐私特性。可以通过上述缓存方法或功能等效的机制实现处理速度目标。
         </p>
 
         <p>
-        某些应用程序（如数字钱包）能够保存任意[=可验证凭证=]或其他受数据完整性保护的文档，这些文档可能来自任何发行者并使用任何上下文。在生产环境中，这些应用可能需要加载外部链接资源（如 JSON-LD 上下文文件）。这预计会随着时间的推移增加用户选择、可扩展性和生态系统的去中心化升级。此类应用的作者被建议阅读本文档的安全性和隐私部分以获取进一步的考虑。
+        某些应用程序（如数字钱包）能够保存任意<a data-cite="VC#dfn-vc">可验证凭证</a>或其他受数据完整性保护的文档，这些文档可能来自任何发行者并使用任何上下文。在生产环境中，这些应用可能需要加载外部链接资源（如 JSON-LD 上下文文件）。这预计会随着时间的推移增加用户选择、可扩展性和生态系统的去中心化升级。此类应用的作者被建议阅读本文档的安全性和隐私部分以获取进一步的考虑。
         </p>
 
         <p>
@@ -1009,7 +1009,7 @@ table.simple tbody tr:last-of-type {
           <h3 id="validating-contexts">验证上下文</h3>
 
           <p>
-        确保消费应用明确批准其将处理的输入文档的类型及其语义是必要的。不检查 JSON-LD 上下文值是否与已知的良好值匹配可能会导致安全漏洞，因为它们传递的语义可能存在差异。应用程序必须使用第 [[[#context-validation]]] 节中的算法，或实现等效保护的算法，以验证[=符合安全文档=]中的上下文。上下文验证必须在运行第 [[[#verify-proof]]] 节或第 [[[#verify-proof-sets-and-chains]]] 节中的适用算法之后运行。
+        确保消费应用明确批准其将处理的输入文档的类型及其语义是必要的。不检查 JSON-LD 上下文值是否与已知的良好值匹配可能会导致安全漏洞，因为它们传递的语义可能存在差异。应用程序必须使用第 [[[#context-validation]]] 节中的算法，或实现等效保护的算法，以验证[=符合规范的安全文档=]中的上下文。上下文验证必须在运行第 [[[#verify-proof]]] 节或第 [[[#verify-proof-sets-and-chains]]] 节中的适用算法之后运行。
           </p>
 
           <p>
@@ -1029,7 +1029,7 @@ table.simple tbody tr:last-of-type {
           </p>
 
           <p>
-        另一种有效的方法是，发送应用程序通过协议（如请求[=可验证展示=]）将文档“压缩”为接收应用程序请求的内容，省略用于保护原始文档的额外发送方特定上下文值。只要密码学套件的验证算法提供成功的验证结果，这种转换是有效的，并将导致先前由省略的上下文压缩的术语扩展为完整的 URL。例如，先前基于发送方提供的上下文压缩为 `foo` 的术语（如 `https://ontology.example/v1`）将被“扩展”为类似 `https://ontology.example#foo` 的 URL，然后在接收应用程序应用 JSON-LD 压缩算法时再次“压缩”为相同的 URL。
+        另一种有效的方法是，发送应用程序通过协议（如请求<a data-cite="VC#dfn-vp">可验证展示</a>）将文档“压缩”为接收应用程序请求的内容，省略用于保护原始文档的额外发送方特定上下文值。只要密码学套件的验证算法提供成功的验证结果，这种转换是有效的，并将导致先前由省略的上下文压缩的术语扩展为完整的 URL。例如，先前基于发送方提供的上下文压缩为 `foo` 的术语（如 `https://ontology.example/v1`）将被“扩展”为类似 `https://ontology.example#foo` 的 URL，然后在接收应用程序应用 JSON-LD 压缩算法时再次“压缩”为相同的 URL。
           </p>
 
         </section>
@@ -1066,7 +1066,7 @@ table.simple tbody tr:last-of-type {
           </p>
 
           <p>
-        同样，由于[=符合安全文档=]可以从一个安全域传输到另一个安全域，处理[=符合安全文档=]的[=符合处理器=]不能假定文档的任何特定基础 URL。在反序列化为 RDF 时，实现必须确保基础 URL 设置为 null。
+        同样，由于[=符合规范的安全文档=]可以从一个安全域传输到另一个安全域，处理[=符合规范的安全文档=]的[=符合规范的处理器=]不能假定文档的任何特定基础 URL。在反序列化为 RDF 时，实现必须确保基础 URL 设置为 null。
           </p>
         </section>
 
@@ -1081,7 +1081,7 @@ table.simple tbody tr:last-of-type {
             <h4 id="cryptosuiteString">`cryptosuiteString` 数据类型</h4>
 
             <p>
-        本规范将密码套件标识符编码为可枚举的字符串，这在需要高效编码此类字符串的过程中（如压缩算法）非常有用。在支持[=字符串=]值数据类型的环境中（如 RDF [[?RDF-CONCEPTS]]），密码标识符内容通过数据类型设置为 `https://w3id.org/security#cryptosuiteString` 的文字值表示。
+        本规范将密码套件标识符编码为可枚举的字符串，这在需要高效编码此类字符串的过程中（如压缩算法）非常有用。在支持<a data-cite="INFRA#string">字符串</a>值数据类型的环境中（如 RDF [[?RDF-CONCEPTS]]），密码标识符内容通过数据类型设置为 `https://w3id.org/security#cryptosuiteString` 的文字值表示。
             </p>
 
             <p>
@@ -1134,7 +1134,7 @@ table.simple tbody tr:last-of-type {
      <h2>与可验证凭证的关系</h2>
 
      <p>
-       实现本规范的密码套件可用于保护[=可验证凭证=]和[=可验证展示=]。针对这些用例的实现者需要注意，在处理这些类型的文档时，可能需要进行额外的检查。
+       实现本规范的密码套件可用于保护<a data-cite="VC#dfn-vc">可验证凭证</a>和<a data-cite="VC#dfn-vp">可验证展示</a>。针对这些用例的实现者需要注意，在处理这些类型的文档时，可能需要进行额外的检查。
      </p>
 
      <p>
@@ -1142,11 +1142,11 @@ table.simple tbody tr:last-of-type {
      </p>
 
      <p>
-       文档作者和实现者应了解<a href="#proofs">证明</a>的有效期（通过<a href="#dfn-created">`created`</a>和<a href="#defn-proof-expires">`expires`</a>属性表示）与<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">凭证</a>的有效期（通过<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a>和<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a>属性表示）之间的区别。这些属性有时可能表示相同的有效期，但在其他情况下可能不一致。在验证<a href="#proofs">证明</a>时，确保感兴趣的时间（可能是当前时间或其他时间）在证明的有效期内（即在<a href="#dfn-created">`created`</a>和<a href="#defn-proof-expires">`expires`</a>之间）是很重要的。在验证[=可验证凭证=]时，确保感兴趣的时间在凭证的有效期内（即在<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a>和<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a>之间）也很重要。未能验证<a href="#proofs">证明</a>或<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">凭证</a>的有效期可能导致接受本应被拒绝的数据。
+       文档作者和实现者应了解<a href="#proofs">证明</a>的有效期（通过<a href="#dfn-created">`created`</a>和<a href="#defn-proof-expires">`expires`</a>属性表示）与<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">凭证</a>的有效期（通过<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a>和<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a>属性表示）之间的区别。这些属性有时可能表示相同的有效期，但在其他情况下可能不一致。在验证<a href="#proofs">证明</a>时，确保感兴趣的时间（可能是当前时间或其他时间）在证明的有效期内（即在<a href="#dfn-created">`created`</a>和<a href="#defn-proof-expires">`expires`</a>之间）是很重要的。在验证<a data-cite="VC#dfn-vc">可验证凭证</a>时，确保感兴趣的时间在凭证的有效期内（即在<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a>和<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a>之间）也很重要。未能验证<a href="#proofs">证明</a>或<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">凭证</a>的有效期可能导致接受本应被拒绝的数据。
      </p>
 
      <p>
-       最后，实施者还应了解[=可验证凭证=]的吊销信息与[=验证方法=]的<a data-cite="CID#dfn-revoked">吊销</a>和<a data-cite="CID#defn-vm-expires">过期</a>时间之间的区别。[=验证方法=]的<a data-cite="CID#dfn-revoked">吊销</a>和<a data-cite="CID#defn-vm-expires">过期</a>时间通过`revocation`和`expires`属性表示，与诸如[=私钥=]被泄露或过期等事件相关，并可能提供时间信息，这些信息可能揭示控制者的细节，例如其安全实践或可能被泄露的时间。[=可验证凭证=]的吊销信息通过`credentialStatus`属性表示，与个人失去[=可验证凭证=]授予的特权等事件相关，并且不会提供时间信息，从而增强隐私性。
+       最后，实施者还应了解<a data-cite="VC#dfn-vc">可验证凭证</a>的吊销信息与[=验证方法=]的<a data-cite="CID#dfn-revoked">吊销</a>和<a data-cite="CID#defn-vm-expires">过期</a>时间之间的区别。[=验证方法=]的<a data-cite="CID#dfn-revoked">吊销</a>和<a data-cite="CID#defn-vm-expires">过期</a>时间通过`revocation`和`expires`属性表示，与诸如[=私钥=]被泄露或过期等事件相关，并可能提供时间信息，这些信息可能揭示控制者的细节，例如其安全实践或可能被泄露的时间。<a data-cite="VC#dfn-vc">可验证凭证</a>的吊销信息通过`credentialStatus`属性表示，与个人失去<a data-cite="VC#dfn-vc">可验证凭证</a>授予的特权等事件相关，并且不会提供时间信息，从而增强隐私性。
      </p>
    </section>
     </section>
@@ -1169,7 +1169,7 @@ table.simple tbody tr:last-of-type {
     <li>规范必须详细说明 [=证明序列化算法=] 的参数以及用于对数据进行密码学保护的其他必要细节。</li>
     <li>规范必须详细说明 [=证明验证算法=] 的参数以及用于对数据进行密码学验证的其他必要细节。</li>
     <li>
-      规范必须定义一个 <dfn class="export" data-lt="cryptosuite instantiation algorithm">数据完整性密码套件实例化算法</dfn>，该算法接受一组选项（[=map=] |options|）并返回一个 [=密码套件实例=]（[=struct=] |cryptosuite|）。此算法应列在 [[[?VC-EXTENSIONS]]] 文档中。一个 <dfn class="export" data-local-lt="cryptosuite instance">数据完整性密码套件实例</dfn> [=struct=] 包含以下 [=struct/items=]。
+      规范必须定义一个 <dfn class="export" data-lt="密码套件实例化算法">数据完整性密码套件实例化算法</dfn>，该算法接受一组选项（[=map=] |options|）并返回一个 [=密码套件实例=]（[=struct=] |cryptosuite|）。此算法应列在 [[[?VC-EXTENSIONS]]] 文档中。一个 <dfn class="export" data-local-lt="cryptosuite instance" data-lt="密码套件实例">数据完整性密码套件实例</dfn> [=struct=] 包含以下 [=struct/items=]。
       <dl data-dfn-for="cryptosuite instance">
         <dt><dfn>createProof</dfn></dt>
         <dd>
@@ -1177,15 +1177,15 @@ table.simple tbody tr:last-of-type {
         </dd>
         <dt><dfn>verifyProof</dfn></dt>
         <dd>
-          一个算法，接受 [=受保护数据文档=]（[=map=] |securedDocument|）作为输入，并生成一个 <dfn>密码套件验证结果</dfn> 或错误。[=密码套件验证结果=] 是一个 [=struct=]，包含以下 [=struct/items=]：
+          一个算法，接受 [=符合规范的安全文档=]（[=map=] |securedDocument|）作为输入，并生成一个 <dfn>密码套件验证结果</dfn> 或错误。[=密码套件验证结果=] 是一个 [=struct=]，包含以下 [=struct/items=]：
           <dl data-dfn-for="cryptosuite verification result">
-            <dt><dfn class="lint-ignore">verified</dfn></dt>
+            <dt><dfn class="lint-ignore" data-lt="验证">verified</dfn></dt>
             <dd>
-              一个 [=布尔值=]，如果验证成功则为 `true`，否则为 `false`。
+              一个 <a data-cite="INFRA#boolean">布尔值</a>，如果验证成功则为 `true`，否则为 `false`。
             </dd>
             <dt><dfn class="lint-ignore">verifiedDocument</dfn></dt>
             <dd>
-              一个 [=map=]，表示移除已验证证明后的 [=受保护数据文档=]，如果 [=密码套件验证结果/verified=] 为 `true`，否则为 <a data-cite="INFRA#nulls">null</a>。
+              一个 [=map=]，表示移除已验证证明后的 [=符合规范的安全文档=]，如果 [=密码套件验证结果/verified=] 为 `true`，否则为 <a data-cite="INFRA#nulls">null</a>。
             </dd>
           </dl>
           该结构可以包含其他对开发者有用的实现特定信息，例如调试信息。如果产生错误，则验证过程未能完成。错误（例如网络错误）并不意味着未来的验证尝试也会失败。
@@ -1216,11 +1216,11 @@ table.simple tbody tr:last-of-type {
     <dl>
       <dt>type</dt>
       <dd>
-        `type` 属性必须包含 [=字符串=] `DataIntegrityProof`。
+        `type` 属性必须包含 <a data-cite="INFRA#string">字符串</a> `DataIntegrityProof`。
       </dd>
       <dt>cryptosuite</dt>
       <dd>
-        `cryptosuite` 属性的值必须是标识 [=密码套件=] 的 [=字符串=]。如果处理环境支持 [=字符串=] 子类型，则 `cryptosuite` 值的子类型必须是 `https://w3id.org/security#cryptosuiteString`。
+        `cryptosuite` 属性的值必须是标识 [=密码套件=] 的 <a data-cite="INFRA#string">字符串</a>。如果处理环境支持 <a data-cite="INFRA#string">字符串</a> 子类型，则 `cryptosuite` 值的子类型必须是 `https://w3id.org/security#cryptosuiteString`。
       </dd>
       <dt>proofValue</dt>
       <dd>
@@ -1246,7 +1246,7 @@ table.simple tbody tr:last-of-type {
       <h2 id="algorithms">算法</h2>
 
       <p>
-      以下定义的算法适用于表示为<dfn data-cite="RFC8259#section-4">JSON 对象</dfn>的文档。本规范遵循[[[JSON-LD11-API]]]规范，将 JSON 对象表示为[=映射=]。一个<dfn class="export">未加密数据文档</dfn>是一个[=映射=]，其中不包含任何证明值。一个<dfn>输入文档</dfn>是尚未添加当前证明的[=映射=]，但它可能包含由先前过程添加的证明值。一个<dfn class="export">已加密数据文档</dfn>是一个包含一个或多个证明值的[=映射=]。
+      以下定义的算法适用于表示为<dfn data-cite="RFC8259#section-4">JSON 对象</dfn>的文档。本规范遵循[[[JSON-LD11-API]]]规范，将 JSON 对象表示为<a data-cite="INFRA#map">映射</a>。一个<dfn class="export">不安全数据文档</dfn>是一个<a data-cite="INFRA#map">映射</a>，其中不包含任何证明值。一个<dfn>输入文档</dfn>是尚未添加当前证明的<a data-cite="INFRA#map">映射</a>，但它可能包含由先前过程添加的证明值。一个<dfn class="export">安全数据文档</dfn>是一个包含一个或多个证明值的<a data-cite="INFRA#map">映射</a>。
       </p>
 
       <p>
@@ -1257,7 +1257,7 @@ table.simple tbody tr:last-of-type {
         <h3 id="processing-model">处理模型</h3>
 
         <p>
-        本节描述了[=符合处理器=]及其特定于应用程序的软件所使用的处理模型。当软件需要确保信息具有防篡改性时，它会执行以下步骤：
+        本节描述了[=符合规范的处理器=]及其特定于应用程序的软件所使用的处理模型。当软件需要确保信息具有防篡改性时，它会执行以下步骤：
         </p>
 
         <ol>
@@ -1300,7 +1300,7 @@ table.simple tbody tr:last-of-type {
        <h3 id="add-proof">添加证明</h3>
 
        <p>
-         以下算法指定了如何将数字证明添加到[=输入文档=]中，然后可以用来验证输出文档的真实性和完整性。所需输入包括[=输入文档=]（[=映射=] |inputDocument|）、[=密码套件实例=]（[=结构=] |cryptosuite|）以及一组选项（[=映射=] |options|）。输出是[=受保护数据文档=]（[=映射=]）或错误。每当此算法对字符串进行编码时，必须使用 UTF-8 编码。
+         以下算法指定了如何将数字证明添加到[=输入文档=]中，然后可以用来验证输出文档的真实性和完整性。所需输入包括[=输入文档=]（<a data-cite="INFRA#map">映射</a> |inputDocument|）、[=密码套件实例=]（<a data-cite="INFRA#struct">结构体</a> |cryptosuite|）以及一组选项（<a data-cite="INFRA#map">映射</a> |options|）。输出是[=符合规范的安全文档=]（<a data-cite="INFRA#map">映射</a>）或错误。每当此算法对字符串进行编码时，必须使用 UTF-8 编码。
        </p>
 
        <ol class="algorithm">
@@ -1311,10 +1311,10 @@ table.simple tbody tr:last-of-type {
            如果 |proof| 的 |type|、|verificationMethod| 和 |proofPurpose| 中的一个或多个值未设置，则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
          </li>
          <li>
-           如果 |options| 中的 |domain| [=结构/项=] 非空，则其值必须等于 |proof| 的 |domain|，否则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
+           如果 |options| 中的 |domain| <a data-cite="INFRA#struct-item">结构项</a> 非空，则其值必须等于 |proof| 的 |domain|，否则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
          </li>
          <li>
-           如果 |options| 中的 |challenge| [=结构/项=] 非空，则其值必须等于 |proof| 的 |challenge|，否则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
+           如果 |options| 中的 |challenge| <a data-cite="INFRA#struct-item">结构项</a> 非空，则其值必须等于 |proof| 的 |challenge|，否则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
          </li>
          <li>
            令 |securedDataDocument| 为 |inputDocument| 的副本。
@@ -1323,7 +1323,7 @@ table.simple tbody tr:last-of-type {
            将 |securedDataDocument| 的 |proof| 设置为 |proof| 的值。
          </li>
          <li>
-           返回 |securedDataDocument| 作为[=受保护数据文档=]。
+           返回 |securedDataDocument| 作为[=符合规范的安全文档=]。
          </li>
        </ol>
      </section>
@@ -1331,7 +1331,7 @@ table.simple tbody tr:last-of-type {
      <section>
        <h3 id="add-proof-set-chain">添加证明集/链</h3>
        <p>
-         以下算法指定了如何从包含证明或证明集/链的受保护文档开始，逐步向证明集或证明链中添加证明。所需输入包括[=受保护数据文档=]（[=映射=] |securedDocument|）、[=密码学套件=]（[=密码套件实例=] |suite|）以及一组选项（[=映射=] |options|）。输出是新的[=受保护数据文档=]（[=映射=]）。每当此算法对字符串进行编码时，必须使用 UTF-8 编码。
+         以下算法指定了如何从包含证明或证明集/链的受保护文档开始，逐步向证明集或证明链中添加证明。所需输入包括[=符合规范的安全文档=]（<a data-cite="INFRA#map">映射</a> |securedDocument|）、[=密码套件=]（[=密码套件实例=] |suite|）以及一组选项（<a data-cite="INFRA#map">映射</a> |options|）。输出是新的[=符合规范的安全文档=]（<a data-cite="INFRA#map">映射</a>）。每当此算法对字符串进行编码时，必须使用 UTF-8 编码。
        </p>
 
        <ol class="algorithm">
@@ -1345,10 +1345,10 @@ table.simple tbody tr:last-of-type {
            令 |matchingProofs| 为一个空列表。
          </li>
          <li>
-           如果 |options| 中的 `previousProof` [=结构/项=] 是字符串，则将 |allProofs| 中 `id` 属性与 `previousProof` 匹配的元素添加到 |matchingProofs|。如果 |allProofs| 中不存在 `id` 等于 `previousProof` 的证明，则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
+           如果 |options| 中的 `previousProof` <a data-cite="INFRA#struct-item">结构项</a> 是字符串，则将 |allProofs| 中 `id` 属性与 `previousProof` 匹配的元素添加到 |matchingProofs|。如果 |allProofs| 中不存在 `id` 等于 `previousProof` 的证明，则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
          </li>
          <li>
-           如果 |options| 中的 `previousProof` [=结构/项=] 是数组，则将 |allProofs| 中 `id` 属性与数组中任一元素匹配的元素添加到 |matchingProofs|。如果 `previousProof` [=列表=] 中的任何元素的 `id` 属性与 |allProofs| 中的任何元素的 `id` 属性不匹配，则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
+           如果 |options| 中的 `previousProof` <a data-cite="INFRA#struct-item">结构项</a> 是数组，则将 |allProofs| 中 `id` 属性与数组中任一元素匹配的元素添加到 |matchingProofs|。如果 `previousProof` <a data-cite="INFRA#list">列表</a> 中的任何元素的 `id` 属性与 |allProofs| 中的任何元素的 `id` 属性不匹配，则必须引发错误，并应传递错误类型为 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>。
          </li>
          <li>
            将 |inputDocument| 的 |proof| 设置为 |matchingProofs|。
@@ -1365,7 +1365,7 @@ table.simple tbody tr:last-of-type {
            将 |output| 的 |proof| 设置为 |allProofs| 的值。
          </li>
          <li>
-           返回 |output| 作为新的[=受保护数据文档=]。
+           返回 |output| 作为新的[=符合规范的安全文档=]。
          </li>
        </ol>
      </section>
@@ -1373,38 +1373,38 @@ table.simple tbody tr:last-of-type {
         <h3 id="verify-proof">验证证明</h3>
 
         <p>
-          以下算法指定了如何通过验证数字证明来检查[=受保护数据文档=]的真实性和完整性。该算法的输入包括：
+          以下算法指定了如何通过验证数字证明来检查[=符合规范的安全文档=]的真实性和完整性。该算法的输入包括：
         </p>
 
         <dl>
           <dt>|mediaType|</dt>
           <dd>
-            一个 [=MIME 类型|媒体类型=]，定义于 [[MIMESNIFF]]
+            一个 [=MIME type|media type=]，定义于 [[MIMESNIFF]]
           </dd>
           <dt>|documentBytes|</dt>
           <dd>
-            一个 [=字节序列=]，其媒体类型为 |mediaType|
+            一个 <a data-cite="INFRA#byte-sequence">字节序列</a>，其媒体类型为 |mediaType|
           </dd>
           <dt>|cryptosuite|</dt>
           <dd>
-            一个 [=密码套件实例=]
+            一个 [=密码套件=]实例
           </dd>
           <dt>|expectedProofPurpose|</dt>
           <dd>
-            一个可选的 [=字符串=]，用于确保 |proof| 是由证明创建者为验证者预期的原因生成的。常见值请参阅 [[[#proof-purposes]]]
+            一个可选的 <a data-cite="INFRA#string">字符串</a>，用于确保 |proof| 是由证明创建者为验证者预期的原因生成的。常见值请参阅 [[[#proof-purposes]]]
           </dd>
           <dt>|domain|</dt>
           <dd>
-            一个可选的 [=字符串集合=]，由证明创建者用于将证明锁定到特定的安全域，并由验证者用于确保证明未跨不同的安全域使用
+            一个可选的 <a data-cite="INFRA#string">字符串</a><a data-cite="INFRA#ordered-set">集合</a>，由证明创建者用于将证明锁定到特定的安全域，并由验证者用于确保证明未跨不同的安全域使用
           </dd>
           <dt>|challenge|</dt>
           <dd>
-            一个可选的 [=字符串=] [=挑战=]，由验证者用于确保攻击者未重放先前创建的证明
+            一个可选的 <a data-cite="INFRA#string">字符串</a> [=挑战=]，由验证者用于确保攻击者未重放先前创建的证明
           </dd>
         </dl>
 
         <p>
-          该算法返回一个 <dfn>验证结果</dfn>，即一个 [=结构=]，其[=结构/项=]包括：
+          该算法返回一个 <dfn>验证结果</dfn>，即一个 <a data-cite="INFRA#struct">结构体</a>，其<a data-cite="INFRA#struct-item">结构项</a>包括：
         </p>
 
         <dl data-dfn-for="verification result">
@@ -1412,32 +1412,32 @@ table.simple tbody tr:last-of-type {
           <dd>`true` 或 `false`</dd>
           <dt><dfn data-dfn-for="verification result">verifiedDocument</dfn></dt>
           <dd>
-            如果 [=验证结果/verified=] 为 `false`，则为 <a data-cite="INFRA#nulls">Null</a>；否则为一个 [=输入文档=]
+            如果 [=verification result/verified=] 为 `false`，则为 <a data-cite="INFRA#nulls">Null</a>；否则为一个 [=输入文档=]
           </dd>
           <dt><dfn data-dfn-for="verification result">mediaType</dfn></dt>
           <dd>
-            如果 [=验证结果/verified=] 为 `false`，则为 <a data-cite="INFRA#nulls">Null</a>；否则为一个 [=MIME 类型|媒体类型=]，可能包含 [=MIME 类型/参数=]
+            如果 [=verification result/verified=] 为 `false`，则为 <a data-cite="INFRA#nulls">Null</a>；否则为一个  [=MIME type|media type=]，可能包含 [=MIME type/parameters=]
           </dd>
           <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
           <dd>
-            一个 [=列表=]，包含 [=问题详情=]，默认为空 [=列表=]
+            一个 <a data-cite="INFRA#list">列表</a>，包含 [=问题详情=]，默认为空 <a data-cite="INFRA#list">列表</a>
           </dd>
           <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
           <dd>
-            一个 [=列表=]，包含 [=问题详情=]，默认为空 [=列表=]
+            一个 <a data-cite="INFRA#list">列表</a>，包含 [=问题详情=]，默认为空 <a data-cite="INFRA#list">列表</a>
           </dd>
         </dl>
 
         <p>
-          当某一步骤说明“必须引发错误”时，这意味着必须返回一个 [=验证结果=]，其 [=验证结果/verified=] 值为 `false`，且 [=验证结果/errors=] 列表非空。
+          当某一步骤说明“必须引发错误”时，这意味着必须返回一个 [=验证结果=]，其 [=verification result/verified=] 值为 `false`，且 [=verification result/errors=] 列表非空。
         </p>
 
         <ol class="algorithm">
           <li>
-            令 |securedDocument:map| 为运行 [=将 JSON 字节解析为 Infra 值=] 的结果，输入为 |documentBytes|。
+            令 |securedDocument:map| 为运行<a data-cite="INFRA#parse-json-bytes-to-an-infra-value">将 JSON 字节解析为 Infra 值</a> 的结果，输入为 |documentBytes|。
           </li>
           <li>
-            如果 |securedDocument| 不是 [=映射=] 或 |securedDocument|.|proof| 不是 [=映射=]，则必须引发错误，并应传递错误类型为 <a href="https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR">PARSING_ERROR</a>。
+            如果 |securedDocument| 不是 <a data-cite="INFRA#map">映射</a> 或 |securedDocument|.|proof| 不是 <a data-cite="INFRA#map">映射</a>，则必须引发错误，并应传递错误类型为 <a href="https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR">PARSING_ERROR</a>。
           </li>
           <li>
             令 |proof:map| 为 |securedDocument|.|proof|。
@@ -1449,7 +1449,7 @@ table.simple tbody tr:last-of-type {
             如果提供了 |expectedProofPurpose|，且其值与 |proof|.|proofPurpose| 不匹配，则必须引发错误，并应传递错误类型为 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>。
           </li>
           <li>
-            如果提供了 |domain|，且其值不包含与 |proof|.|domain| 相同的 [=字符串=]（将单个 [=字符串=] 视为仅包含该 [=字符串=] 的 [=集合=]），则必须引发错误，并应传递错误类型为 <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>。
+            如果提供了 |domain|，且其值不包含与 |proof|.|domain| 相同的 <a data-cite="INFRA#string">字符串</a>（将单个 <a data-cite="INFRA#string">字符串</a> 视为仅包含该 <a data-cite="INFRA#string">字符串</a> 的 <a data-cite="INFRA#ordered-set">集合</a>），则必须引发错误，并应传递错误类型为 <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>。
           </li>
           <li>
             如果提供了 |challenge|，且其值与 |proof|.|challenge| 不匹配，则必须引发错误，并应传递错误类型为 <a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>。
@@ -1458,7 +1458,7 @@ table.simple tbody tr:last-of-type {
             令 |cryptosuiteVerificationResult| 为运行 |cryptosuite|.[=密码套件实例/verifyProof=] 算法的结果，输入为 |securedDocument|。
           </li>
           <li>
-            返回一个 [=验证结果=]，其 [=结构/项=] 包括：
+            返回一个 [=验证结果=]，其 <a data-cite="INFRA#struct-item">结构项</a> 包括：
             <dl data-link-for="verification result">
               <dt>[=verified=]</dt>
               <dd>|cryptosuiteVerificationResult|.|verified|</dd>
@@ -1473,10 +1473,10 @@ table.simple tbody tr:last-of-type {
      <section>
         <h3 id="verify-proof-sets-and-chains">验证证明集和链</h3>
         <p>
-          在[=证明集=]或[=证明链=]中，[=受保护数据文档=]具有一个 `proof` 属性，其中包含[=证明=]的列表 (|allProofs|)。以下算法提供了一种方法，用于通过验证 |allProofs| 中的每个证明来检查[=受保护数据文档=]的真实性和完整性。如果只需要验证 |allProofs| 中的部分证明，也可以采用其他方法。但如果选择验证部分证明，需要注意，任何包含 `previousProof` 的证明只有在其引用的证明也被验证通过时，才能被视为已验证。
+          在[=证明集=]或[=证明链=]中，[=符合规范的安全文档=]具有一个 `proof` 属性，其中包含[=证明=]的列表 (|allProofs|)。以下算法提供了一种方法，用于通过验证 |allProofs| 中的每个证明来检查[=符合规范的安全文档=]的真实性和完整性。如果只需要验证 |allProofs| 中的部分证明，也可以采用其他方法。但如果选择验证部分证明，需要注意，任何包含 `previousProof` 的证明只有在其引用的证明也被验证通过时，才能被视为已验证。
         </p>
         <p>
-          所需输入是一个[=受保护数据文档=] (|securedDocument|)。生成一个与 |allProofs| 中每个证明对应的[=验证结果=]列表，并返回一个单一的综合[=验证结果=]作为输出。实现可以选择返回其他[=验证结果=]和/或任何其他元数据，作为综合[=验证结果=]的补充。
+          所需输入是一个[=符合规范的安全文档=] (|securedDocument|)。生成一个与 |allProofs| 中每个证明对应的[=验证结果=]列表，并返回一个单一的综合[=验证结果=]作为输出。实现可以选择返回其他[=验证结果=]和/或任何其他元数据，作为综合[=验证结果=]的补充。
         </p>
         <ol class="algorithm">
           <li>
@@ -1492,7 +1492,7 @@ table.simple tbody tr:last-of-type {
                 将 |matchingProofs| 设置为空列表。
               </li>
               <li>
-                如果 |proof| 包含 `previousProof` 属性且其值是[=字符串=]，则将 |allProofs| 中 `id` 属性值与 `previousProof` 值匹配的元素添加到 |matchingProofs|。如果 |allProofs| 中不存在 `id` 值等于 `previousProof` 的证明，则必须引发错误，并应传递错误类型为 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>。如果 `previousProof` 属性是[=列表=]，则将 |allProofs| 中 `id` 属性值与列表中任一元素匹配的元素添加到 |matchingProofs|。如果 `previousProof` [=列表=] 中的任何元素的 `id` 属性值与 |allProofs| 中的任何元素的 `id` 属性值不匹配，则必须引发错误，并应传递错误类型为 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>。
+                如果 |proof| 包含 `previousProof` 属性且其值是<a data-cite="INFRA#string">字符串</a>，则将 |allProofs| 中 `id` 属性值与 `previousProof` 值匹配的元素添加到 |matchingProofs|。如果 |allProofs| 中不存在 `id` 值等于 `previousProof` 的证明，则必须引发错误，并应传递错误类型为 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>。如果 `previousProof` 属性是<a data-cite="INFRA#list">列表</a>，则将 |allProofs| 中 `id` 属性值与列表中任一元素匹配的元素添加到 |matchingProofs|。如果 `previousProof` <a data-cite="INFRA#list">列表</a> 中的任何元素的 `id` 属性值与 |allProofs| 中的任何元素的 `id` 属性值不匹配，则必须引发错误，并应传递错误类型为 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>。
               </li>
               <li>
                 将 |inputDocument| 设置为 |securedDocument| 的副本，并移除 `proof` 值，然后将 |inputDocument|.|proof| 设置为 |matchingProofs|。
@@ -1535,26 +1535,26 @@ table.simple tbody tr:last-of-type {
         <h3 id="context-validation">上下文验证</h3>
 
         <p>
-          以下算法提供了一种机制，用于确保应用程序在执行文档中输入的业务规则之前，理解与文档关联的上下文。有关此算法的更多原理，请参阅第 [[[#validating-contexts]]] 节。此算法的输入包括文档（[=映射=] |inputDocument|）、一组已知的 JSON-LD 上下文（[=列表=] |knownContext|）以及在检测到未知上下文时是否重新压缩的布尔值（[=布尔值=] |recompact|）。
+          以下算法提供了一种机制，用于确保应用程序在执行文档中输入的业务规则之前，理解与文档关联的上下文。有关此算法的更多原理，请参阅第 [[[#validating-contexts]]] 节。此算法的输入包括文档（<a data-cite="INFRA#map">映射</a> |inputDocument|）、一组已知的 JSON-LD 上下文（<a data-cite="INFRA#list">列表</a> |knownContext|）以及在检测到未知上下文时是否重新压缩的布尔值（<a data-cite="INFRA#boolean">布尔值</a> |recompact|）。
         </p>
 
         <p>
-          此算法返回一个 <dfn class="lint-ignore">上下文验证结果</dfn>，即一个 [=结构=]，其[=结构/项=]包括：
+          此算法返回一个 <dfn class="lint-ignore">上下文验证结果</dfn>，即一个 <a data-cite="INFRA#struct">结构体</a>，其<a data-cite="INFRA#struct-item">结构项</a>包括：
         </p>
         <dl data-dfn-for="context validation result">
           <dt><dfn data-dfn-for="context validation result">validated</dfn></dt>
           <dd>`true` 或 `false`</dd>
           <dt><dfn data-dfn-for="context validation result" class="lint-ignore">validatedDocument</dfn></dt>
           <dd>
-            如果 [=上下文验证结果/validated=] 为 `false`，则为 <a data-cite="INFRA#nulls">Null</a>；否则为一个 [=输入文档=]
+            如果 [=context validation result/validated=] 为 `false`，则为 <a data-cite="INFRA#nulls">Null</a>；否则为一个 [=输入文档=]
           </dd>
           <dt><dfn data-dfn-for="context validation result" class="lint-ignore">warnings</dfn></dt>
           <dd>
-            一个 [=列表=]，包含 [=问题详情=]，默认为空 [=列表=]
+            一个 <a data-cite="INFRA#list">列表</a>，包含 [=问题详情=]，默认为空 <a data-cite="INFRA#list">列表</a>
           </dd>
           <dt><dfn data-dfn-for="context validation result" class="lint-ignore">errors</dfn></dt>
           <dd>
-            一个 [=列表=]，包含 [=问题详情=]，默认为空 [=列表=]
+            一个 <a data-cite="INFRA#list">列表</a>，包含 [=问题详情=]，默认为空 <a data-cite="INFRA#list">列表</a>
           </dd>
         </dl>
 
@@ -1601,7 +1601,7 @@ table.simple tbody tr:last-of-type {
         </p>
 
         <p>
-          当通过 HTTP 接口公开这些错误时，实施者应使用 [[RFC9457]] 将错误数据结构编码为 <dfn>问题详情</dfn> [=映射=]。如果使用 [[RFC9457]]：
+          当通过 HTTP 接口公开这些错误时，实施者应使用 [[RFC9457]] 将错误数据结构编码为 <dfn>问题详情</dfn> <a data-cite="INFRA#map">映射</a>。如果使用 [[RFC9457]]：
         </p>
 
         <ul>
@@ -1609,10 +1609,10 @@ table.simple tbody tr:last-of-type {
             错误对象的 `type` 值必须是以 `https://w3id.org/security#` 开头并以下文列出的值结尾的 URL。
           </li>
           <li>
-            `title` 值应提供一个简短但具体的、可供人类阅读的 [=字符串=]，用于描述错误。
+            `title` 值应提供一个简短但具体的、可供人类阅读的 <a data-cite="INFRA#string">字符串</a>，用于描述错误。
           </li>
           <li>
-            `detail` 值应提供一个更长的、可供人类阅读的 [=字符串=]，用于描述错误。
+            `detail` 值应提供一个更长的、可供人类阅读的 <a data-cite="INFRA#string">字符串</a>，用于描述错误。
           </li>
         </ul>
 
@@ -1726,7 +1726,7 @@ table.simple tbody tr:last-of-type {
         <dfn class="lint-ignore">密码学灵活性</dfn> 是一种设计<em>频繁连接</em>的信息安全系统以支持<em>在多种密码学原语和/或算法之间切换</em>的实践。密码学灵活性的主要目标是使系统能够快速适应新的密码学原语和算法，而无需对系统基础设施进行破坏性更改。因此，当某个特定的密码学原语（例如 SHA-1 算法）被认为不再安全时，可以通过简单的配置文件更改将系统重新配置为使用更新的原语。
       </p>
       <p>
-        当信息安全系统中的客户端和服务器定期联系时，密码学灵活性最为有效。然而，当特定密码学算法保护的消息是长期存在的（例如 [=可验证凭证=]），并且/或者客户端（持有者）可能无法轻松地重新联系服务器（发行者）时，密码学灵活性无法提供所需的保护。
+        当信息安全系统中的客户端和服务器定期联系时，密码学灵活性最为有效。然而，当特定密码学算法保护的消息是长期存在的（例如 <a data-cite="VC#dfn-vc">可验证凭证</a>），并且/或者客户端（持有者）可能无法轻松地重新联系服务器（发行者）时，密码学灵活性无法提供所需的保护。
       </p>
       <p>
         <dfn class="lint-ignore">密码学分层</dfn> 是一种设计<em>很少连接</em>的信息安全系统以<em>同时使用多种原语和/或算法</em>的实践。密码学分层的主要目标是使系统能够在一个或多个密码学算法或原语失效的情况下，仍然保持对有效载荷的密码学保护。例如，使用 RSA、ECDSA 和 Falcon 算法并行对单个信息进行数字签名，可以提供一种机制，即使这三种数字签名算法中的两种失效，系统仍然可以利用未失效的密码学保护继续保护信息。开发人员被建议对所有可能需要保护一年或更长时间的签名内容利用此功能。
@@ -1849,7 +1849,7 @@ table.simple tbody tr:last-of-type {
       </p>
 
       <p>
-        此过程用于确保密码学材料（如私有密码学密钥）不会被应用于非预期用途。例如，如果一个本应用于颁发[=可验证凭证=]的私有密码学密钥被用于登录网站（即用于身份验证），这就是密码学材料的误用。不检查验证关系是危险的，因为某些密码学材料的限制和保护配置文件可能由其预期用途决定。例如，一些应用程序可能被信任仅将密码学材料用于一个目的，或者某些密码学材料可能受到更高的保护，例如存储在数据中心的硬件安全模块中，而不是作为笔记本电脑上的未加密文件。
+        此过程用于确保密码学材料（如私有密码学密钥）不会被应用于非预期用途。例如，如果一个本应用于颁发<a data-cite="VC#dfn-vc">可验证凭证</a>的私有密码学密钥被用于登录网站（即用于身份验证），这就是密码学材料的误用。不检查验证关系是危险的，因为某些密码学材料的限制和保护配置文件可能由其预期用途决定。例如，一些应用程序可能被信任仅将密码学材料用于一个目的，或者某些密码学材料可能受到更高的保护，例如存储在数据中心的硬件安全模块中，而不是作为笔记本电脑上的未加密文件。
       </p>
     </section>
    <section>
@@ -1860,7 +1860,7 @@ table.simple tbody tr:last-of-type {
      </p>
 
      <p>
-       此过程用于确保证明不会被应用程序误用于非预期目的，因为这对证明创建者来说是危险的。例如，如果一个证明声明其目的是用于保护[=可验证凭证=]中的断言，但却被用于[=身份验证=]以登录网站，这就是一种误用。在这种情况下，证明创建者将证明附加到他们期望分发给无限数量其他方的[=可验证凭证=]中。如果网站错误地接受此类证明作为[=身份验证=]而非其预期用途，则这些方中的任何一方都可以冒充证明创建者登录网站。
+       此过程用于确保证明不会被应用程序误用于非预期目的，因为这对证明创建者来说是危险的。例如，如果一个证明声明其目的是用于保护<a data-cite="VC#dfn-vc">可验证凭证</a>中的断言，但却被用于[=身份验证=]以登录网站，这就是一种误用。在这种情况下，证明创建者将证明附加到他们期望分发给无限数量其他方的<a data-cite="VC#dfn-vc">可验证凭证</a>中。如果网站错误地接受此类证明作为[=身份验证=]而非其预期用途，则这些方中的任何一方都可以冒充证明创建者登录网站。
      </p>
    </section>
 
@@ -1902,7 +1902,7 @@ table.simple tbody tr:last-of-type {
      <h3 id="network-requests">网络请求</h3>
 
      <p>
-       本规范的设计方式确保在[=符合安全文档=]上验证证明时不需要网络请求。然而，读者可能会注意到，<a href="#data-model">JSON-LD 上下文</a>和[=验证方法=]可能包含可以通过网络连接检索的 URL。这种担忧适用于验证期间或之后可能从网络加载的任何 URL。
+       本规范的设计方式确保在[=符合规范的安全文档=]上验证证明时不需要网络请求。然而，读者可能会注意到，<a href="#data-model">JSON-LD 上下文</a>和[=验证方法=]可能包含可以通过网络连接检索的 URL。这种担忧适用于验证期间或之后可能从网络加载的任何 URL。
      </p>
      <p>
        在可能的情况下，建议实现者永久或积极地缓存此类信息，以减少需要通过网络获取此类 URL 的实现的攻击面。例如，<a href="#data-model">JSON-LD 上下文</a>的缓存技术在[[[#contexts-and-vocabularies]]]节中进行了描述，而某些[=验证方法=]（如 `did:key` [[?DID-KEY]]）根本不需要从网络中获取。
@@ -1916,7 +1916,7 @@ table.simple tbody tr:last-of-type {
      <h3>其他安全注意事项</h3>
 
      <p>
-       由于本规范描述的用于保护文档的技术具有通用性，其使用的安全影响可能不会立即显现给读者。为了了解在完整的软件系统中可能需要考虑的安全问题，建议实现者阅读有关此技术在[=可验证凭证=]生态系统中的使用方式 [[?VC-DATA-MODEL-2.0]]；有关更多信息，请参阅<a data-cite="?VC-DATA-MODEL-2.0#security-considerations">可验证凭证安全注意事项</a>部分。
+       由于本规范描述的用于保护文档的技术具有通用性，其使用的安全影响可能不会立即显现给读者。为了了解在完整的软件系统中可能需要考虑的安全问题，建议实现者阅读有关此技术在<a data-cite="VC#dfn-vc">可验证凭证</a>生态系统中的使用方式 [[?VC-DATA-MODEL-2.0]]；有关更多信息，请参阅<a data-cite="?VC-DATA-MODEL-2.0#security-considerations">可验证凭证安全注意事项</a>部分。
      </p>
    </section>
     </section>
@@ -1985,15 +1985,15 @@ table.simple tbody tr:last-of-type {
             <h3>网络请求的指纹识别</h3>
 
             <p>
-    在<a href="#verify-proof">验证证明</a>期间或之后，任何可能从网络加载的URL都存在指纹识别问题。本规范的设计方式确保在[=符合安全文档=]上验证证明时不需要网络请求。然而，读者可能会注意到，<a href="#data-model">JSON-LD上下文</a>和[=验证方法=]可能包含可以通过网络连接检索的URL，这会引发指纹识别问题。
+    在<a href="#verify-proof">验证证明</a>期间或之后，任何可能从网络加载的URL都存在指纹识别问题。本规范的设计方式确保在[=符合规范的安全文档=]上验证证明时不需要网络请求。然而，读者可能会注意到，<a href="#data-model">JSON-LD上下文</a>和[=验证方法=]可能包含可以通过网络连接检索的URL，这会引发指纹识别问题。
             </p>
 
             <p>
-    例如，[=符合安全文档=]的创建者可能会为<a href="#data-model">JSON-LD上下文</a>和[=验证方法=]创建唯一的每文档URL。在验证此类文档时，验证者从网络获取该信息会向文档的创建者暴露其对[=符合安全文档=]的兴趣，这可能导致与任何非文档创建者的隐私预期不匹配。
+    例如，[=符合规范的安全文档=]的创建者可能会为<a href="#data-model">JSON-LD上下文</a>和[=验证方法=]创建唯一的每文档URL。在验证此类文档时，验证者从网络获取该信息会向文档的创建者暴露其对[=符合规范的安全文档=]的兴趣，这可能导致与任何非文档创建者的隐私预期不匹配。
             </p>
 
             <p>
-    建议实施者遵循第[[[#network-requests]]]节中关于URL缓存和防御性实现的指导。鼓励使用诸如<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp">Oblivious HTTP</a>之类的技术，从网络中检索资源而不暴露发出请求的客户端。此外，可以使用启发式方法来确定[=符合安全文档=]的创建者是否以可能违反隐私预期的方式使用指纹识别URL。这些启发式方法可以用于向可能处理包含可疑指纹识别URL的文档的实体显示警告。
+    建议实施者遵循第[[[#network-requests]]]节中关于URL缓存和防御性实现的指导。鼓励使用诸如<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp">Oblivious HTTP</a>之类的技术，从网络中检索资源而不暴露发出请求的客户端。此外，可以使用启发式方法来确定[=符合规范的安全文档=]的创建者是否以可能违反隐私预期的方式使用指纹识别URL。这些启发式方法可以用于向可能处理包含可疑指纹识别URL的文档的实体显示警告。
             </p>
           </section>
 
@@ -2018,7 +2018,7 @@ table.simple tbody tr:last-of-type {
             <h3>其他隐私注意事项</h3>
 
             <p>
-    由于本规范描述的用于保护文档的技术具有通用性，其使用的隐私影响可能不会立即显现给读者。为了了解在完整的软件系统中可能需要考虑的隐私问题，建议实施者阅读有关此技术在[=可验证凭证=]生态系统中的使用方式[[?VC-DATA-MODEL-2.0]]；有关更多信息，请参阅<a data-cite="?VC-DATA-MODEL-2.0#privacy-considerations">可验证凭证隐私注意事项</a>部分。
+    由于本规范描述的用于保护文档的技术具有通用性，其使用的隐私影响可能不会立即显现给读者。为了了解在完整的软件系统中可能需要考虑的隐私问题，建议实施者阅读有关此技术在<a data-cite="VC#dfn-vc">可验证凭证</a>生态系统中的使用方式[[?VC-DATA-MODEL-2.0]]；有关更多信息，请参阅<a data-cite="?VC-DATA-MODEL-2.0#privacy-considerations">可验证凭证隐私注意事项</a>部分。
             </p>
           </section>
 
@@ -2046,10 +2046,10 @@ table.simple tbody tr:last-of-type {
        <section class="appendix informative">
          <h2>理解证明集和证明链</h2>
          <p>
-   第[[[#proof-sets]]]节和第[[[#proof-chains]]]节描述了如何在[=受保护的数据文档=]中表达多个证明；也就是说，除了在[=受保护的数据文档=]中包含单个[=证明=]外，还可以将多个证明表达为[=列表=]，如[[[#example-a-proof-set-in-a-data-document]]]和[[[#example-a-proof-chain-in-a-data-document]]]中所示。该[=列表=]的元素是[=证明集=]的成员，并且可以选择性地成为[=证明链=]的成员。本节的目的是解释每种功能的预期用途，特别是它们不同的安全属性。这些不同的安全属性导致了第[[[#add-proof-set-chain]]]节中处理方式的差异。
+   第[[[#proof-sets]]]节和第[[[#proof-chains]]]节描述了如何在[=安全数据文档=]中表达多个证明；也就是说，除了在[=安全数据文档=]中包含单个[=证明=]外，还可以将多个证明表达为<a data-cite="INFRA#list">列表</a>，如[[[#example-a-proof-set-in-a-data-document]]]和[[[#example-a-proof-chain-in-a-data-document]]]中所示。该<a data-cite="INFRA#list">列表</a>的元素是[=证明集=]的成员，并且可以选择性地成为[=证明链=]的成员。本节的目的是解释每种功能的预期用途，特别是它们不同的安全属性。这些不同的安全属性导致了第[[[#add-proof-set-chain]]]节中处理方式的差异。
          </p>
          <p>
-   本节以简化的方式表示[=受保护的数据文档=]及其证明，以便观察重要的安全属性。
+   本节以简化的方式表示[=安全数据文档=]及其证明，以便观察重要的安全属性。
          </p>
          <p>
    考虑一个有三个签署人的场景：CEO、CFO 和工程副总裁（VP of Engineering）。每个人都需要拥有一对用于签署文档的公钥和私钥。我们分别用<em>secretCEO/publicCEO</em>、<em>secretCFO/publicCFO</em>和<em>secretVPE/publicVPE</em>表示这些签署人的私钥/公钥。
@@ -2086,7 +2086,7 @@ table.simple tbody tr:last-of-type {
    }
          </pre>
          <p>
-   [=持有者=]或任何其他中间方在接收到包含[=证明集=]的[=受保护的数据文档=]时，可以在将其传递给其他实体之前移除`proof`集合中的任何值，并且[=受保护的数据文档=]仍然可以验证。这可能符合或不符合意图。例如，对于签署人发送生日贺卡给一位重要员工，使用[=证明集=]可能是可以的。但如果我们试图模拟一个公司层级审批的业务流程，这就不理想了，因为任何中间方都可以从[=证明集=]中移除签名，且仍然可以验证；例如，在下面的示例中，看起来 CFO 和 CEO 批准了某些内容，而没有工程副总裁的同意。
+             <a data-cite="VC#dfn-holder">持有者</a>或任何其他中间方在接收到包含[=证明集=]的[=安全数据文档=]时，可以在将其传递给其他实体之前移除`proof`集合中的任何值，并且[=安全数据文档=]仍然可以验证。这可能符合或不符合意图。例如，对于签署人发送生日贺卡给一位重要员工，使用[=证明集=]可能是可以的。但如果我们试图模拟一个公司层级审批的业务流程，这就不理想了，因为任何中间方都可以从[=证明集=]中移除签名，且仍然可以验证；例如，在下面的示例中，看起来 CFO 和 CEO 批准了某些内容，而没有工程副总裁的同意。
          </p>
          <pre class="example nohighlight" title="从证明集中移除签名">
    {
@@ -2136,7 +2136,7 @@ table.simple tbody tr:last-of-type {
    }
          </pre>
          <p>
-   现在，当 CEO 验证包含上述[=证明链=]的[=受保护的数据文档=]时，他们将检查 CFO 的签名是否基于工程副总裁的签名。首先，他们将根据工程副总裁的公钥检查`id`属性值为`urn:proof-1`的证明。请注意，此证明是针对原始文档的。
+   现在，当 CEO 验证包含上述[=证明链=]的[=安全数据文档=]时，他们将检查 CFO 的签名是否基于工程副总裁的签名。首先，他们将根据工程副总裁的公钥检查`id`属性值为`urn:proof-1`的证明。请注意，此证明是针对原始文档的。
          </p>
          <p>
    接下来，CEO 将根据 CFO 的公钥检查`id`属性值为`urn:proof-2`的证明。然而，为了确保 CFO 签署的文档包含工程副总裁已签署的证明，我们将验证此证明是否覆盖了文档和`urn:proof-1`的组合。如果验证成功，CEO 将签署文档，生成一个覆盖包含`urn:proof-1`和`urn:proof-2`的文档的证明。最终的[=证明链=]如下所示：
@@ -2162,7 +2162,7 @@ table.simple tbody tr:last-of-type {
    }
          </pre>
          <p>
-   此[=受保护的数据文档=]的接收者随后以类似的方式验证它，检查链中的每个证明。
+   此[=安全数据文档=]的接收者随后以类似的方式验证它，检查链中的每个证明。
          </p>
        </section>
 <section class="appendix informative">
@@ -2248,7 +2248,7 @@ table.simple tbody tr:last-of-type {
       为上下文和词汇表文件添加了密码学哈希，并指出这些文件应被缓存。
     </li>
     <li>
-      添加了与链接数据和[=可验证凭证=]关系的章节。
+      添加了与链接数据和<a data-cite="VC#dfn-vc">可验证凭证</a>关系的章节。
     </li>
     <li>
       添加了证明集和链的算法。
