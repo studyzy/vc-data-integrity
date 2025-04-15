@@ -465,7 +465,7 @@ table.simple tbody tr:last-of-type {
        </p>
 
        <dl class="termlist definitions" data-sort="ascending">
-           <dt><dfn class="export">数据完整性证明</dfn></dt>
+           <dt><dfn class="export" data-lt="data-integrity-proof">数据完整性证明</dfn></dt>
            <dd>
                一组表示数字证明及验证该证明所需参数的属性。<strong>数字签名</strong>是一种数据完整性证明。
            </dd>
@@ -1246,7 +1246,7 @@ table.simple tbody tr:last-of-type {
       <h2 id="algorithms">算法</h2>
 
       <p>
-      以下定义的算法适用于表示为<dfn data-cite="RFC8259#section-4">JSON 对象</dfn>的文档。本规范遵循[[[JSON-LD11-API]]]规范，将 JSON 对象表示为<a data-cite="INFRA#map">映射</a>。一个<dfn class="export">不安全数据文档</dfn>是一个<a data-cite="INFRA#map">映射</a>，其中不包含任何证明值。一个<dfn>输入文档</dfn>是尚未添加当前证明的<a data-cite="INFRA#map">映射</a>，但它可能包含由先前过程添加的证明值。一个<dfn class="export">安全数据文档</dfn>是一个包含一个或多个证明值的<a data-cite="INFRA#map">映射</a>。
+      以下定义的算法适用于表示为<dfn data-cite="RFC8259#section-4">JSON 对象</dfn>的文档。本规范遵循[[[JSON-LD11-API]]]规范，将 JSON 对象表示为<a data-cite="INFRA#map">映射</a>。一个<dfn class="export" data-lt="unsecured-data-document">不安全数据文档</dfn>是一个<a data-cite="INFRA#map">映射</a>，其中不包含任何证明值。一个<dfn>输入文档</dfn>是尚未添加当前证明的<a data-cite="INFRA#map">映射</a>，但它可能包含由先前过程添加的证明值。一个<dfn class="export" data-lt="secured-data-document">安全数据文档</dfn>是一个包含一个或多个证明值的<a data-cite="INFRA#map">映射</a>。
       </p>
 
       <p>
