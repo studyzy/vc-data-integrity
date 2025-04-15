@@ -113,253 +113,217 @@
   </head>
   <body  typeof="owl:Ontology">
     <section id="abstract">
-      <p>This document describes the <span property="dc:title" id="title"></span>, i.e.,
-         the <span property="dc:description" id="description"></span>.
-      </p>
-      <p>Alternate versions of the vocabulary definition exist in
-        <a rel="alternate" href="vocabulary.ttl">Turtle</a> and
-        <a rel="alternate" href="vocabulary.jsonld">JSON-LD</a>.
-      </p>
-      <dl>
-        <dt>Published:</dt><dd><time property="dc:date" id="time"></time></dd>
-        <dt>Version Info:</dt>
-        <dd>2.0</dd>
-        <dt id="see_also">See Also: </dt>
-       </dl>
-    </section>
-    <section id="sotd">
-      <p>
-        Comments regarding this document are welcome. Please file issues
-        directly on <a href="https://github.com/w3c/vc-data-integrity/issues/">GitHub</a>, or send them to
-        <a href="mailto:public-vc-comments@w3.org">public-vc-comments@w3.org</a>
-        (<a href="mailto:public-vc-comments-request@w3.org?subject=subscribe">subscribe</a>,
-        <a href="https://lists.w3.org/Archives/Public/public-vc-comments/">archives</a>).
-      </p>
-    </section>
-    <section>
-      <h2>Specification of terms</h2>
-      <p>
-        In general, the terms &mdash; i.e., the properties and classes &mdash; used in the VCDM are formally specified in
-        Recommendation Track documents published by the <a href="https://www.w3.org/groups/wg/vc">W3C Verifiable Credentials
-          Working Group</a> or, for some deprecated or reserved terms, in Reports published by the <a
-          href="https://www.w3.org/groups/cg/credentials">W3C Credentials Community Group</a>. In each case of such external
-        definition, the term's description in this document contains a link to the relevant specification. Additionally, the
-        `rdfs:definedBy` property in the RDFS representation(s) refers to the formal specification.
-      </p>
-      <p>
-        In some cases, a local explanation is necessary to complement, or to replace, the definition found in an external
-        specification. For instance, this is so when the term is needed to provide a consistent structure to the RDFS
-        vocabulary, such as when the term defines a common supertype for class instances that are used as objects of
-        specific properties, or when <a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF Graphs</a> are
-        involved. For such cases, the extra definition is included in the current document (and the `rdfs:comment` property
-        is used to include them in the RDFS representations).
-      </p>
-      <figure id="vocabulary-diagram" style="text-align:center">
-        <div data-include="vocabulary.svg" data-include-replace="true" data-oninclude="massageSVGLinks"></div>
-        <figcaption>Overview diagram of the vocabulary (without the reserved and deprecated items, error codes, and `xsd` datatypes).<br />
-          A separate, stand-alone <a href="vocabulary.svg" target="_blank">SVG version</a> of the diagram, as well as a <a
-            href="#vocabulary-diagram-alt">textual description</a>,
-          are also available.
-        </figcaption>
-      </figure>
-    </section>
+    <p>本文档描述了<span property="dc:title" id="title"></span>，即
+       <span property="dc:description" id="description"></span>。
+    </p>
+    <p>该词汇定义的其他版本以
+      <a rel="alternate" href="vocabulary.ttl">Turtle</a>和
+      <a rel="alternate" href="vocabulary.jsonld">JSON-LD</a>格式提供。
+    </p>
+    <dl>
+      <dt>发布时间：</dt><dd><time property="dc:date" id="time"></time></dd>
+      <dt>版本信息：</dt>
+      <dd>2.0</dd>
+      <dt id="see_also">另见：</dt>
+     </dl>
+  </section>
+  <section id="sotd">
+    <p>
+      欢迎对本文档的评论。请直接在<a href="https://github.com/w3c/vc-data-integrity/issues/">GitHub</a>上提交问题，或发送至
+      <a href="mailto:public-vc-comments@w3.org">public-vc-comments@w3.org</a>
+      （<a href="mailto:public-vc-comments-request@w3.org?subject=subscribe">订阅</a>，
+      <a href="https://lists.w3.org/Archives/Public/public-vc-comments/">存档</a>）。
+    </p>
+  </section>
+  <section>
+    <h2>术语规范</h2>
+    <p>
+      通常情况下，VCDM中使用的术语（即属性和类）在由
+      <a href="https://www.w3.org/groups/wg/vc">W3C可验证凭证工作组</a>发布的推荐轨道文档中正式规范，或者在由
+      <a href="https://www.w3.org/groups/cg/credentials">W3C凭证社区组</a>发布的报告中规范某些已弃用或保留的术语。在每种此类外部定义的情况下，本文档中的术语描述包含指向相关规范的链接。此外，RDFS表示中的`rdfs:definedBy`属性也会引用正式规范。
+    </p>
+    <p>
+      在某些情况下，需要本地解释来补充或替代外部规范中的定义。例如，当术语需要为RDFS词汇表提供一致的结构时（例如，当术语定义了用作特定属性对象的类实例的通用超类型时），或者涉及<a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF图</a>时。在这些情况下，额外的定义包含在本文档中（并在RDFS表示中使用`rdfs:comment`属性包含它们）。
+    </p>
+    <figure id="vocabulary-diagram" style="text-align:center">
+      <div data-include="vocabulary.svg" data-include-replace="true" data-oninclude="massageSVGLinks"></div>
+      <figcaption>词汇表的概览图（不包括保留和已弃用的项目、错误代码以及`xsd`数据类型）。<br />
+        还提供了该图的单独<a href="vocabulary.svg" target="_blank">SVG版本</a>，以及<a href="#vocabulary-diagram-alt">文本描述</a>。
+      </figcaption>
+    </figure>
+  </section>
 
-    <section>
-      <h2>Namespaces</h2>
-      <p>This specification makes use of the following namespaces:</p>
-      <dl class="terms" id="namespaces">
-      </dl>
-    </section>
+  <section>
+    <h2>命名空间</h2>
+    <p>本规范使用了以下命名空间：</p>
+    <dl class="terms" id="namespaces">
+    </dl>
+  </section>
 
-    <section>
-      <h2><code>@context</code> files</h2>
-      <p>The following <code>@context</code> files make use of the terms defined in this specification:</p>
-      <ul id="contexts">
-      </ul>
+  <section>
+    <h2><code>@context</code>文件</h2>
+    <p>以下<code>@context</code>文件使用了本规范中定义的术语：</p>
+    <ul id="contexts">
+    </ul>
+  </section>
+
+  <section id="term_definitions">
+    <h1>常规术语</h1>
+
+    <section id="property_definitions" class="term_definitions">
+      <h2>属性定义</h2>
     </section>
 
-    <section id="term_definitions">
-      <h1>Regular terms</h1>
-
-      <section id="property_definitions" class="term_definitions">
-        <h2>Property definitions</h2>
-      </section>
-
-      <section id="class_definitions" class="term_definitions">
-        <h2>Class definitions</h2>
-      </section>
-  
-      <section id="datatype_definitions" class="term_definitions">
-        <h2>Datatype definitions</h2>
-      </section>
-  
-      <section id="individual_definitions" class="term_definitions">
-        <h2>Definitions for individuals</h2>
-      </section>
-    </section>   
-
-    <section id="reserved_term_definitions">
-      <h1>Reserved terms</h1>
-    
-      <p>All terms in this section are <em><strong>reserved</strong></em>.
-        Implementers may use these properties, but should expect them and/or their meanings to change during the process to
-        normatively specify them.
-      </p>
-    
-      <section id="reserved_property_definitions" class="term_definitions">
-        <h2>Reserved properties</h2>
-      </section>
-
-      <section id="reserved_class_definitions" class="term_definitions">
-        <h2>Reserved classes</h2>
-      </section>
-    
-      <section id="reserved_datatype_definitions" class="term_definitions">
-        <h2>Reserved datatype definitions</h2>
-      </section>
-    
-      <section id="reserved_individual_definitions" class="term_definitions">
-        <h2>Reserved individuals</h2>
-      </section>
+    <section id="class_definitions" class="term_definitions">
+      <h2>类定义</h2>
     </section>
 
-    <section id="deprecated_term_definitions">
-      <h1>Deprecated terms</h1>
+    <section id="datatype_definitions" class="term_definitions">
+      <h2>数据类型定义</h2>
+    </section>
 
-      <p class="annoy">All terms in this section are <em><strong>deprecated</strong></em>, and are only kept in this vocabulary for backward compatibility. 
-        <br><br>New applications should not use them.
+    <section id="individual_definitions" class="term_definitions">
+      <h2>个体定义</h2>
+    </section>
+  </section>
+
+  <section id="reserved_term_definitions">
+    <h1>保留术语</h1>
+
+    <p>本节中的所有术语均为<em><strong>保留</strong></em>术语。
+      实现者可以使用这些属性，但应预期它们及/或其含义可能会在规范过程中发生变化。
+    </p>
+
+    <section id="reserved_property_definitions" class="term_definitions">
+      <h2>保留属性</h2>
+    </section>
+
+    <section id="reserved_class_definitions" class="term_definitions">
+      <h2>保留类</h2>
+    </section>
+
+    <section id="reserved_datatype_definitions" class="term_definitions">
+      <h2>保留数据类型定义</h2>
+    </section>
+
+    <section id="reserved_individual_definitions" class="term_definitions">
+      <h2>保留个体</h2>
+    </section>
+  </section>
+   <section id="deprecated_term_definitions">
+      <h1>已弃用术语</h1>
+
+      <p class="annoy">本节中的所有术语均为<em><strong>已弃用</strong></em>术语，仅为向后兼容而保留。
+        <br><br>新应用程序不应使用这些术语。
       </p>
 
       <section id="deprecated_property_definitions" class="term_definitions">
-        <h2>Deprecated properties</h2>
+        <h2>已弃用属性</h2>
       </section>
 
       <section id="deprecated_class_definitions" class="term_definitions">
-        <h2>Deprecated classes</h2>
+        <h2>已弃用类</h2>
       </section>
 
       <section id="deprecated_datatype_definitions" class="term_definitions">
-        <h2>Deprecated datatype definitions</h2>
+        <h2>已弃用数据类型定义</h2>
       </section>
-    
+
       <section id="deprecated_individual_definitions" class="term_definitions">
-        <h2>Deprecated individuals</h2>
+        <h2>已弃用个体</h2>
       </section>
-    </section>   
+    </section>
 
 
     <section class="appendix" id="vocabulary-diagram-alt">
-      <h2>Diagram description</h2>
+      <h2>图表描述</h2>
       <details>
-        <summary>Overview diagram of the vocabulary (without the reserved and deprecated items, error codes, and `xsd` datatypes).</summary>
+        <summary>词汇表的概览图（不包括保留和已弃用的项目、错误代码以及`xsd`数据类型）。</summary>
         <p>
-          The diagram uses boxes, ellipses, and connecting lines with different "styles" 
-          (border color, end marker, line type) to differentiate their semantic meaning:
-          "Property", "Class", and "Datatype" are identified by the shape of the 
-          graph node (e.g., an ellipse signifies a "Class"); "Superclass", "Domain Of", "Range",
-          "Type", and "Contains" relationships are identified by the style of the connecting line.
-          These style names are used in the explanation text that follows, below.
+          该图表使用不同“样式”的框、椭圆和连接线（边框颜色、端点标记、线型）来区分其语义含义：
+          “属性”、“类”和“数据类型”通过图形节点的形状（例如，椭圆表示“类”）来标识；
+          “超类”、“领域”、“范围”、“类型”和“包含”关系通过连接线的样式来标识。
+          这些样式名称在以下解释文本中使用。
         </p>
         <p>
-          The diagram is roughly divided into three sections — lower left, lower right, and upper.
-          To make this description easier to understand, these sections will be respectively referred to
-          as the "Proof", "Verification Method", and "Verification Relationship" sections.
-          Shapes in the three sections are connected by lines of different styles; additionally, one box,
-          labeled as "multibase" and shaped as "Datatype", bridges the two lower sections 
-          ("Proof" and "Verification Method").
+          图表大致分为三个部分——左下、右下和上部。
+          为了便于理解，这些部分将分别称为“证明”、“验证方法”和“验证关系”部分。
+          三个部分中的形状通过不同样式的线连接；此外，一个标记为“multibase”且形状为“数据类型”的框连接了两个下部部分
+          （“证明”和“验证方法”）。
         </p>
         <p>
-          Each of these sections has an ellipse at the top, labeled as "Proof", "VerificationMethod", 
-          and "VerificationRelationship", respectively. The Verification Method section
-          includes an additional ellipse, labeled as "ControllerDocument", side-by-side with the ellipse
-          labeled as "VerificationMethod".
+          每个部分的顶部都有一个椭圆，分别标记为“Proof”、“VerificationMethod”和“VerificationRelationship”。验证方法部分
+          包括一个额外的椭圆，标记为“ControllerDocument”，与标记为“VerificationMethod”的椭圆并排。
         </p>
         <section>
-          <h3>Proof Section</h3>
+          <h3>证明部分</h3>
           <p>
-            The left side of the section contains another ellipse, 
-            labeled as "ProofGraph", and connected with a line
-            styled as "Contains" to the "Proof" ellipse. 
-            A separate box, styled as "Property" and labeled as "proof", is connected
-            with a line styled as "Range" to the "ProofGraph" ellipse.
+            该部分的左侧包含另一个椭圆，
+            标记为“ProofGraph”，并通过样式为“包含”的线连接到“Proof”椭圆。
+            一个单独的框，样式为“属性”且标记为“proof”，通过样式为“范围”的线连接到“ProofGraph”椭圆。
           </p>
           <p>
-            There are two more ellipses in this section, 
-            labeled as "Ed25519Signature2020" and "DataIntegrityProof", and
-            each connected to the "Proof" ellipse with lines styled as "Superclass". 
-            The "DataIntegrityProof" ellipse is also connected to a box, styled as "Property" and labeled as 
-            "cryptosuite", with a line styled as "Domain Of". 
-            The "cryptosuite" Property box is connected to a shape, styled as "Datatype" and labeled as "cryptosuiteString", 
-            with a line styled as "Range".
+            该部分还有两个椭圆，
+            标记为“Ed25519Signature2020”和“DataIntegrityProof”，
+            它们通过样式为“超类”的线连接到“Proof”椭圆。
+            “DataIntegrityProof”椭圆还通过样式为“领域”的线连接到一个样式为“属性”且标记为“cryptosuite”的框。
+            “cryptosuite”属性框通过样式为“范围”的线连接到一个样式为“数据类型”且标记为“cryptosuiteString”的形状。
           </p>
           <p>
-            The right side of the section contains a column of labeled boxes, all styled as "Property".
-            The labels, from top to bottom, are "previousProof", "domain", "challenge", "nonce", "created", and "proofValue". 
-            The "Proof" ellipse is connected to all of these boxes with lines styled as "Domain Of". 
-            The "previousProof" box is also connected to the "Proof" ellipse, with a line styled as "Range". 
-            The "proofValue" box is connected to a shape, styled as "Datatype" and labeled as "multibase", with a line styled as "Range".
-            Finally, the same "multibase" "Datatype" shape is connected to another box, styled as "Property" and labeled as "digestMultibase", with a line styled as "Range".
+            该部分的右侧包含一列标记的框，均为“属性”样式。
+            从上到下的标签分别为“previousProof”、“domain”、“challenge”、“nonce”、“created”和“proofValue”。
+            “Proof”椭圆通过样式为“领域”的线连接到所有这些框。
+            “previousProof”框还通过样式为“范围”的线连接到“Proof”椭圆。
+            “proofValue”框通过样式为“范围”的线连接到一个样式为“数据类型”且标记为“multibase”的形状。
+            最后，同一个“multibase”数据类型形状通过样式为“范围”的线连接到另一个样式为“属性”且标记为“digestMultibase”的框。
           </p>
         </section>
         <section>
-          <h3>Verification Method Section</h3>
+          <h3>验证方法部分</h3>
 
           <p>
-            The left side of this section contains a column of three labeled boxes, all styled as "Property". 
-            The labels, from top to bottom, are "controller", "expires", and "revoked".
-            Each of these is connected to the "VerificationMethod" ellipse, with a line styled as "Domain Of".
-            The "controller" "Property" box is also connected to the "ControllerDocument" ellipse, while
-            the "expires" "Property" box is also connected to the "Proof" ellipse (in the Proof section);
-            both of these extra connecting lines are styled as "Domain Of".
+            该部分的左侧包含一列三个标记的框，均为“属性”样式。
+            从上到下的标签分别为“controller”、“expires”和“revoked”。
+            每个框都通过样式为“领域”的线连接到“VerificationMethod”椭圆。
+            “controller”属性框还通过样式为“领域”的线连接到“ControllerDocument”椭圆，而
+            “expires”属性框还通过样式为“领域”的线连接到“Proof”椭圆（在证明部分中）。
           </p>
 
           <p>
-            There is also a distinct box, styled as "Property" and labeled as "verificationMethod". 
-            This "verificationMethod" box is connected to the "VerificationMethod" 
-            ellipse, with a connecting line styled as "Range".
+            还有一个独立的框，样式为“属性”且标记为“verificationMethod”。
+            该“verificationMethod”框通过样式为“范围”的连接线连接到“VerificationMethod”椭圆。
           </p>
 
           <p>
-            The middle of this section contains three more ellipses, labeled as "Multikey, "Ed25519VerificationKey2020", 
-            and "JsonWebKey".
-            Each of these is connected to the "VerificationMethod" ellipse, with a line styled as "Superclass".
+            该部分的中间包含三个椭圆，分别标记为“Multikey”、“Ed25519VerificationKey2020”和“JsonWebKey”。
+            每个椭圆通过样式为“超类”的线连接到“VerificationMethod”椭圆。
           </p>
 
           <p>
-            Two boxes, styled as "Property" and labeled as "secretKeyMultibase" and "publicKeyMultibase", 
-            are connected to the ellipse labeled as "Multikey" with a line styled as "Domain Of".
-            Each of these boxes is also connected to the "multibase" "Datatype" shape in the Proof section, 
-            with lines styled as "Range".
+            两个样式为“属性”的框，分别标记为“secretKeyMultibase”和“publicKeyMultibase”，
+            通过样式为“领域”的线连接到标记为“Multikey”的椭圆。
+            这两个框还通过样式为“范围”的线连接到证明部分中的“multibase”数据类型形状。
           </p>
 
           <p>
-            Finally, two boxes, styled as "Property" and labeled as "secretKeyJwk" 
-            and "publicKeyJwk", are connected to the "JsonWebKey" ellipse,
-            with a line styled as "Domain Of". 
-            Both boxes are also connected to a shape, styled as "Datatype" and labeled as "rdf:JSON", with
-            lines styled as "Range".
+            最后，两个样式为“属性”的框，分别标记为“secretKeyJwk”和“publicKeyJwk”，通过样式为“领域”的线连接到“JsonWebKey”椭圆。
+            两个框还通过样式为“范围”的线连接到一个样式为“数据类型”且标记为“rdf:JSON”的形状。
           </p>
 
         </section>
         <section>
-          <h3>Verification Relationship Section</h3>
+          <h3>验证关系部分</h3>
           <p>
-            The left side of the section contains a single box, styled as "Property"
-            and labeled as "proofPurpose". 
-            This box is connected to the "VerificationRelationship" ellipse,
-            with a line styled as "Range". 
-            It is also connected to the "Proof" ellipse in the Proof section,
-            with a line styled as "Domain Of".
+            该部分的左侧包含一个样式为“属性”的单个框，标记为“proofPurpose”。
+            该框通过样式为“范围”的线连接到“VerificationRelationship”椭圆。
+            它还通过样式为“领域”的线连接到证明部分中的“Proof”椭圆。
           </p>
 
           <p>
-            The right side of the section contains a column of labeled boxes,
-            all styled as "Property". 
-            The labels, from top to bottom, are "verificationMethod", "authentication", "assertionMethod", "capabilityDelegation", "capabilityInvocation", and "keyAgreement".
-            Each of these boxes is connected to the "VerificationMethod" ellipse in the Verification Method section,
-            with a line styled as "Range". 
-            Finally, each of these boxes is also connected to the "VerificationRelationship" ellipse,
-            with a line styled as "Type".
+            该部分的右侧包含一列标记的框，均为“属性”样式。
+            从上到下的标签分别为“verificationMethod”、“authentication”、“assertionMethod”、“capabilityDelegation”、“capabilityInvocation”和“keyAgreement”。
+            每个框通过样式为“范围”的线连接到验证方法部分中的“VerificationMethod”椭圆。
+            最后，每个框还通过样式为“类型”的线连接到“VerificationRelationship”椭圆。
           </p>
         </section>
       </details>
