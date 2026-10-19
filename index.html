@@ -3966,36 +3966,62 @@ already required by Data Integrity).
           <h4>Merkle Tree Hash (MTH)</h4>
 
           <p>
-The Merkle Tree Hash (MTH) construction is taken from [[RFC9162]] Section 2.1.1.
-Unlike the RFC text, this specification's MTH operates directly on the
+The Merkle Tree Hash (MTH) construction is adapted from [[RFC9162]] Section
+2.1.1. Unlike the RFC text, this specification's MTH operates directly on the
 <em>leaf-hash array</em> (the output of [[[#MerkleizeSD]]], step 4), in order to
 avoid applying the leaf prefix twice. The hash function used is the
 cryptosuite-specified function.
           </p>
 
+          <p>
+This section defines the MTH construction in full, using this specification's
+own notation. [[RFC9162]] Section 2.1.1 is referenced only to establish that
+this is the Merkle tree construction used by Certificate Transparency, and to
+justify the `0x00` and `0x01` domain-separation prefixes; no notation from
+[[RFC9162]] is required to follow the algorithms below.
+          </p>
+
+          <p>
+This and the following algorithms use two notations for contiguous ranges of an
+array. For an array |arr| and integers |i| and |j| with 0 ≤ |i| ≤ |j| ≤
+length(|arr|), `|arr|[i:j]` denotes the sub-array of |arr| consisting of the
+elements at positions |i| to |j| − 1, and `[i, j)` denotes the corresponding
+half-open range of positions. A range `[i, i)` is empty.
+          </p>
+
+          <p>
+Let |leafHashes| be an array of leaf hashes, where `|leafHashes|[0:n]` is the
+entire array and n is its length (that is, |treeSize|). `MTH(|leafHashes|[a:b])`
+is defined recursively as follows; the empty tree (b = a) and the single-leaf
+tree (b − a = 1) are the base cases.
+          </p>
+
           <ol class="algorithm">
             <li>
-`MTH({})` is defined to be `H()`, the hash of the empty input. This occurs
-exactly when the tree is empty (|treeSize| = 0; see [[[#MerkleizeSD]]]).
+For an empty range (b = a), `MTH(|leafHashes|[a:a])` is defined to be `H()`,
+the hash of the empty input. This occurs exactly when the tree is empty
+(|treeSize| = 0; see [[[#MerkleizeSD]]]).
             </li>
             <li>
-`MTH({d[0]})` is defined to be `d[0]`: a single leaf hash is itself the root of
-the single-leaf subtree. The leaf prefix `0x00` was already applied once when
-computing the leaf hash ([[[#MerkleizeSD]]], step 4) and MUST NOT be applied
-again here.
+For a single-leaf range (b − a = 1), `MTH(|leafHashes|[a:a+1])` is defined to
+be `|leafHashes|[a]`: a single leaf hash is itself the root of the single-leaf
+subtree. The leaf prefix `0x00` was already applied once when computing the leaf
+hash ([[[#MerkleizeSD]]], step 4) and MUST NOT be applied again here.
             </li>
             <li>
-For n &gt; 1, let k be the largest power of two strictly less than n:
-`MTH(D[n]) = H(0x01 || MTH(D[0:k]) || MTH(D[k:n]))`.
+For a range with more than one leaf (b − a &gt; 1), let |k| be the largest power
+of two strictly less than b − a:
+`MTH(|leafHashes|[a:b]) = H(0x01 || MTH(|leafHashes|[a:a+k]) || MTH(|leafHashes|[a+k:b]))`.
             </li>
           </ol>
 
           <p class="note">
 This composition is byte-for-byte identical to applying [[RFC9162]] Section
-2.1.1 directly to the raw leaf data — [[RFC9162]]'s `H(0x00 || d[0])` for
-single-element lists is exactly the leaf-hash computation of
-[[[#MerkleizeSD]]], step 4, and internal nodes apply the `0x01` prefix in both
-formulations. The `0x00` (leaf) and `0x01` (internal node) domain-separation
+2.1.1 directly to the raw leaf data. In [[RFC9162]] terms, the leaf hash is the
+hash of the `0x00` prefix followed by the raw leaf data; here that raw leaf data
+is the salt concatenated with the UTF-8 representation of the statement, as
+computed in [[[#MerkleizeSD]]], step 4. Internal nodes apply the `0x01` prefix in
+both formulations. The `0x00` (leaf) and `0x01` (internal node) domain-separation
 prefixes MUST be preserved; [[RFC9162]] notes that these prefixes are required
 for second-preimage resistance.
           </p>
@@ -4097,8 +4123,8 @@ using the cryptosuite-specified hash function, and append |leafHash| to
 |leafHashes|. The concatenation order MUST be as stated in this step.
             </li>
             <li>
-Set |merkleRoot| to the result of evaluating `MTH(|leafHashes|)`, as defined in
-[[[#MTH]]]. For an empty tree (|treeSize| = 0) this is `MTH({}) = H()`.
+Set |merkleRoot| to the result of evaluating `MTH(|leafHashes|[0:|treeSize|])`, as
+defined in [[[#MTH]]]. For an empty tree (|treeSize| = 0) this is `H()`.
             </li>
             <li>
 Add |saltSeed| as `saltSeed`, |treeSize| as `treeSize`, and |merkleRoot| as
@@ -4149,7 +4175,7 @@ a &lt; b):
             <li>
 If no element of |leafIndexes| falls within `[a, b)` (i.e., every leaf of this
 subtree is undisclosed), append the root hash of this subtree,
-`MTH(leafHashes[a:b])`, to the output and terminate the recursion. For a
+`MTH(|leafHashes|[a:b])` to the output and terminate the recursion. For a
 single-leaf range this value is the leaf hash itself (see [[[#MTH]]]).
             </li>
             <li>
@@ -4201,7 +4227,7 @@ the concatenation of `0x00`, the salt from the derived proof, and the
 statement), and |subtreeProof| (an array of byte strings). A single byte string
 (|reconstructedRoot|) is produced as output, or an error. If |treeSize| is 0,
 |leafIndexes| and |subtreeProof| MUST both be empty and the
-|reconstructedRoot| is `H()` (`MTH({})`, see [[[#MTH]]]).
+|reconstructedRoot| is `H()` (the empty-tree case of [[[#MTH]]]).
           </p>
 
           <p>
